@@ -1,150 +1,240 @@
-import base64
-import os
-import json
-from time import sleep
-from datetime import datetime
-from io import BytesIO
+from celery import Celery, chain
+from transformers import AutoProcessor, VisionEncoderDecoderModel, pipeline
 from PIL import Image
+from langchain_core.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from langchain_community.llms import Ollama
+from internvl_loader import load_internvl_model
+import torch
 
-from plyer import notification
+# -------------------------------
+# Celery Configuration
+# -------------------------------
 
-from langchain_ollama import OllamaLLM
+app = Celery(
+    'ocr_pipeline',
+    broker='redis://localhost:6379/0',
+    backend='redis://localhost:6379/0'
+)
 
-from screenshot_taker import capture_screenshot
+# -------------------------------
+# Global Model Loading
+# -------------------------------
 
+# Load the InternVL model, tokenizer, processor, and device
+model, tokenizer, processor, device = load_internvl_model()
 
-# Convert image to base64
-def image_to_base64(image_path):
+# Initialize Ollama for both preconditioning and classification
+llm = Ollama(model="llama3.1", temperature=0.3, base_url="http://localhost:11434")
+
+# Define classification prompt template
+classification_prompt = PromptTemplate(
+    input_variables=["text", "image_description"],
+    template=(
+        "You are analyzing a screenshot with the following elements:\n"
+        "1. Visual Description: {image_description}\n"
+        "2. Extracted Text Content: {text}\n\n"
+        "Based on both the visual context and text content, identify key elements and classify them.\n"
+        "Consider:\n"
+        "- The type of application or website visible\n"
+        "- The nature of the content (work, entertainment, social, etc.)\n"
+        "- Any visible UI elements or interactions\n\n"
+        "Return the result as a JSON object with:\n"
+        "- 'label': either 'productive' or 'procrastination'\n"
+        "- 'score': confidence between 0 and 1\n"
+        "- 'keywords': list of identified elements and their classifications\n"
+        "- 'context': brief explanation of the classification\n\n"
+        "JSON Response:"
+    )
+)
+
+classification_chain = LLMChain(prompt=classification_prompt, llm=llm)
+
+# -------------------------------
+# LangChain Preconditioning Setup with Ollama
+# -------------------------------
+# Define a prompt template that uses a context (JSON or prompt) and the extracted text.
+prompt_template = PromptTemplate(
+    input_variables=["context", "extracted_text"],
+    template=(
+        "Using the following context: {context}\n"
+        "And the extracted text: {extracted_text}\n"
+        "Return a preconditioned version of the text that emphasizes the given context."
+    )
+)
+
+# Create a LangChain LLMChain using the prompt template and the Ollama LLM.
+llm_chain = LLMChain(prompt_template=prompt_template, llm=llm)
+
+def generate_preconditioned_text(context_input, extracted_text):
+    """
+    Uses LangChain (with Ollama) to generate a modified version of the extracted text
+    based on the provided context.
+    """
+    return llm_chain.run(context=context_input, extracted_text=extracted_text)
+
+# -------------------------------
+# Task 1: InternVL OCR Agent Task
+# -------------------------------
+@app.task
+def internvl_ocr_task(image_path):
+    """
+    Uses InternVL2.5-2B-MPO to extract text and analyze image content.
+    """
+    print("\n[Step 1] Starting image analysis...")
+    
+    # Load and process the image
+    image = Image.open(image_path).convert("RGB")
+    pixel_values = processor(images=image, return_tensors="pt").to(torch.bfloat16).cuda()
+    
+    # Generate the description using the chat method
+    question = "<image>\nPlease describe what you see in this image, focusing on any text content."
+    response = model.chat(tokenizer, pixel_values, question, 
+                         generation_config=dict(max_new_tokens=1024, do_sample=True))
+    
+    print(f"[Step 1] Extracted content: {response[:100]}...")  # Show first 100 chars
+    return response
+
+# -------------------------------
+# Task 2: Preconditioning Task Using LangChain with Ollama
+# -------------------------------
+@app.task
+def precondition_text_classifier_task(extracted_text, context_input):
+    """
+    Preconditions the extracted text using a JSON input or prompt.
+    This simulates training or context adjustment before classification.
+    Uses LangChain with an Ollama-served LLM.
+    """
+    print("\n[Step 2] Starting text preconditioning...")
+    modified_text = generate_preconditioned_text(context_input, extracted_text)
+    print(f"[Step 2] Modified text: {modified_text[:100]}...")  # Show first 100 chars
+    return modified_text
+
+# -------------------------------
+# Task 3: Llama Text Analysis Task
+# -------------------------------
+@app.task
+def llama_text_classification_task(modified_text, original_image_description):
+    """
+    Uses Ollama's llama2 model to analyze text and classify keywords as productive or procrastination.
+    Now includes both the modified text and original image description for better context.
+    """
+    print("\n[Step 3] Starting text classification...")
+    
     try:
-        with open(image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
+        # Get classification result using both text and image description
+        result_str = classification_chain.run(
+            text=modified_text,
+            image_description=original_image_description
+        )
+        
+        # Parse the JSON response
+        import json
+        result = json.loads(result_str)
+        
+        print(f"[Step 3] Classification result: {result}")
+        return {
+            "label": result.get("label", "unknown"),
+            "score": result.get("score", 0.0),
+            "keywords": result.get("keywords", []),
+            "context": result.get("context", "No context provided")
+        }
     except Exception as e:
-        print(f"Error converting image to base64: {e}")
-        return None
-
-# Function to convert screenshots to PIL and then base64
-def convert_screenshot_to_base64(image_path):
-    pil_image = Image.open(image_path)
-
-    # Convert RGBA to RGB if necessary
-    if pil_image.mode == 'RGBA':
-        pil_image = pil_image.convert('RGB')  # Convert to RGB
-
-    buffered = BytesIO()
-    pil_image.save(buffered, format="JPEG")  # Save the image as JPEG
-    img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")  # Convert to base64
-    return img_str
-
-# Capture and analyze screenshots using LangChain
-def capture_and_analyze_screenshots():
-    """
-    Captures screenshots, analyzes them using LangChain with the Ollama `llava` model, 
-    and saves the results in a folder called 'analyses'.
-    """
-    all_analyses = []  # List to store all screenshot analyses
-
-    # Ensure the 'analyses' folder exists
-    if not os.path.exists('./analyses'):
-        os.makedirs('./analyses')
-
-    llm = OllamaLLM(model="llava")  # Initialize LangChain's Ollama model for analysis
-
-    for _ in range(4):  # Capture 4 screenshots every minute
-        screenshot_file = capture_screenshot()  # Function that captures screenshots
-
-        # Convert screenshot to base64
-        base64_image = convert_screenshot_to_base64(screenshot_file)
-
-        # Prompt
-        prompt =  """
-        You are analyzing a screenshot of a user's computer screen. Your task is to return an objective, concise summary in a strict JSON format. Follow these steps carefully:
-
-        1. Search for specific keywords indicating internet use (e.g., 'Google Chrome', 'Firefox', 'Edge', 'http', 'https'). If found, return 'website': true; otherwise, return 'website': false.
-        2. Log relevant keywords related to the primary activity (e.g., 'VS Code', 'Word', 'Excel', 'YouTube', 'Twitter'). Use these to provide a factual description of the main content displayed on the screen without assumptions.
-        3. Determine productivity based on keywords: classify tasks as productive (e.g., 'code', 'research', 'document', 'Python', 'C++') or unproductive (e.g., 'video', 'social', 'game'). Work-related tasks such as coding MUST ALWAYS be classified as productive.
-        4. Return a strict final verdict based on keyword analysis. If unproductive keywords dominate, return 'verdict': true (procrastinating), otherwise return 'verdict': false (productive).
-
-        Return the response as a valid JSON object with the following structure:
-        {
-          "website": true or false,
-          "content": "short phrase summarizing the page",
-          "justification": "a short justification of the activity being productive or procrastination",
-          "verdict": true or false
+        print(f"[Step 3] Error in classification: {str(e)}")
+        return {
+            "label": "error",
+            "score": 0.0,
+            "keywords": [],
+            "context": f"Error during classification: {str(e)}"
         }
 
-        Important Guidelines:
-        - Be STRICT in your analysis. Assume any non-work-related activity is procrastination.
-        - For video content (YouTube, Netflix, etc.), base your analysis on the visible title or caption of the video, not just the video thumbnail. If a video appears unrelated to work, consider it procrastination.
-        - Do not overfocus on small details like icons or peripheral information. Focus on the overall activity that is most visible on the screen.
-        - If no browser or internet-connected application is visible but the user is working with code, research papers, or productivity apps, consider this work-related.
-        - Any art-related activities (e.g., drawing apps) or browsing that is unrelated to science, programming, or work must be considered procrastination.
-        - The final verdict ("verdict") should never be null. If unsure, default to "verdict": true (procrastination).
-        - IF THE USER IS DOING ANY OF THE BELOW, IT WILL BE CONSIDERED WORK RELATED UNDER ANY CIRCUMSTANCE:
-            1. Coding or doing code-related activities
-            2. Math or math-related activities. 
-            3. ANY of the sciences, if they are doing physics, chemistry, biology, computer science, or anything engineering related. 
-            4. On a code editor, researching about a science subject, or researching about mathematics.
-        """
-        # Use LangChain's multi-modal LLM with the image
-        llm_with_image_context = llm.bind(images=[base64_image])
-        response = llm_with_image_context.invoke(prompt)
-        print("RAW RESPONSE FROM LLM:", response)
+# -------------------------------
+# Task 4: Refinement Agent Task
+# -------------------------------
+@app.task
+def refinement_agent_task(classification_result):
+    """
+    Invoked when the confidence is low.
+    Flags the classification result for further review.
+    """
+    flagged_result = {
+        "label": classification_result["label"],
+        "confidence": classification_result["score"],
+        "flag": True,
+        "message": "Low confidence - requires further review."
+    }
+    return flagged_result
 
-        # Parse the response as JSON
-        response_json = clean_response(response)
+# -------------------------------
+# Task 5: Decision Aggregator Task
+# -------------------------------
+@app.task
+def decision_aggregator_task(classification_result):
+    """
+    Aggregates the classification result. If the confidence is below a threshold,
+    calls the refinement agent.
+    """
+    print("\n[Step 4] Starting decision aggregation...")
+    CONFIDENCE_THRESHOLD = 0.75
+    if classification_result["score"] < CONFIDENCE_THRESHOLD:
+        print("[Step 4] Low confidence detected, invoking refinement agent...")
+        flagged_result = refinement_agent_task.delay(classification_result).get()
+        final_decision = flagged_result
+    else:
+        print("[Step 4] Confidence threshold met, accepting classification...")
+        final_decision = {
+            "label": classification_result["label"],
+            "confidence": classification_result["score"],
+            "flag": False,
+            "message": "Classification accepted."
+        }
+    print(f"[Step 4] Final decision: {final_decision}")
+    return final_decision
 
-        if response_json:
+# -------------------------------
+# Pipeline Runner Function
+# -------------------------------
+def run_pipeline(image_path, context_input):
+    """
+    Enhanced pipeline that maintains the image description context throughout the process.
+    """
+    print("\n=== Starting Pipeline ===")
+    print(f"Image path: {image_path}")
+    print(f"Context input: {context_input}")
+    
+    # Step 1: Get OCR and image description
+    ocr_result = internvl_ocr_task.delay(image_path).get()
+    
+    # Step 2: Precondition the text
+    preconditioned_text = precondition_text_classifier_task.delay(
+        ocr_result, 
+        context_input
+    ).get()
+    
+    # Step 3: Classify with both text and original description
+    classification_result = llama_text_classification_task.delay(
+        preconditioned_text,
+        ocr_result  # Pass the original image description
+    ).get()
+    
+    # Step 4: Aggregate decision
+    final_decision = decision_aggregator_task.delay(classification_result).get()
+    
+    print("\n=== Pipeline Complete ===")
+    return final_decision
 
-            # Add a timestamp to the JSON response
-            analysis_timestamp = datetime.now().isoformat()
-            final_result = {
-                "timestamp": analysis_timestamp,
-                "analysis": response_json
-            }
+# -------------------------------
+# For Testing the Pipeline
+# -------------------------------
+if __name__ == '__main__':
 
-            # Add the analysis to the list
-            all_analyses.append(final_result)
+    # Replace with the actual path to your image file.
+    image_path = "./screenshots/screenshot_2025-01-01_18-33-51.png"
+    # Provide a JSON input or prompt that defines what constitutes procrastination.
+    context_input = '{"definition": "Procrastination includes social media, entertainment, and non-study activities."}'
+    
+    final_output = run_pipeline(image_path, context_input)
+    print("Final Output:", final_output)
 
-             # Send a notification to the user if procrastination is detected 
-            if response_json.get("verdict") is True:
-                notification.notify (
-                    title = "!!!BIG BORTHER IS ALWAYS WATCHING!!!",
-                    message = "Ollama suspects you might be procrastinating. Get back to work."
-                )
-
-        # Wait for 60 seconds before capturing the next screenshot
-        sleep(60)
-
-    # Save the analyses to a JSON file inside the 'analyses' folder
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    analysis_filename = f"analyses/analysis_{timestamp}.json"
-
-    with open(analysis_filename, 'w') as json_file:
-        json.dump(all_analyses, json_file, indent=4)
-
-    print(f"Analyses saved to {analysis_filename}")
-    return all_analyses  # Return the list of analyses for further processing
-
-# Function to clean response and extract the JSON
-def clean_response(response_text):
-    try:
-        # Find the first '{' and the last '}' in the response
-        start_idx = response_text.find('{')
-        end_idx = response_text.rfind('}')
-        
-        if start_idx == -1 or end_idx == -1:
-            raise ValueError("No valid JSON found in response")
-
-        # Extract the JSON portion between the curly braces
-        cleaned_text = response_text[start_idx:end_idx+1]
-        return json.loads(cleaned_text)
-
-    except (json.JSONDecodeError, ValueError) as e:
-        print(f"Failed to decode JSON: {e}")
-        return None
-
-def run_analysis():
-    capture_and_analyze_screenshots()
-
-if __name__ == "__main__":
-    run_analysis()
+print(f"CUDA available: {torch.cuda.is_available()}")
+print(f"CUDA version: {torch.version.cuda}")
