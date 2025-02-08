@@ -61,7 +61,7 @@ def create_study_schedule(analyses):
     Data collected from user's screen activity:
     {analysis_data}
 
-    Return output in Json format and remove comments and nothing else:
+    Return output in Json format and remove all comments:
 
     {{
         "schedule": {{
