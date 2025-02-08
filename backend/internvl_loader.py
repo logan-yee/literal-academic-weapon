@@ -34,8 +34,8 @@ def load_internvl_model():
     else:
         model = model.eval()
     
-    # Load the tokenizer and processor
+    # Load the tokenizer and processor with trust_remote_code=True
     tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True, use_fast=False)
-    processor = AutoProcessor.from_pretrained(path)
+    processor = AutoProcessor.from_pretrained(path, trust_remote_code=True)
     
     return model, tokenizer, processor, device

@@ -64,7 +64,7 @@ prompt_template = PromptTemplate(
 )
 
 # Create a LangChain LLMChain using the prompt template and the Ollama LLM.
-llm_chain = LLMChain(prompt_template=prompt_template, llm=llm)
+llm_chain = LLMChain(prompt=prompt_template, llm=llm)
 
 def generate_preconditioned_text(context_input, extracted_text):
     """
