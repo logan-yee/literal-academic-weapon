@@ -2,6 +2,7 @@ celery
 redis
 transformers
 torch
+torchvision
 Pillow
 requests
 langchain
@@ -9,3 +10,5 @@ langchain-community
 langchain-core
 langchain-ollama
 plyer
+accelerate
+flash-attn

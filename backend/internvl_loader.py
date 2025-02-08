@@ -3,9 +3,8 @@ import logging
 from pathlib import Path
 from typing import Tuple, Optional
 sys.path.append(str(Path(__file__).parent))
-from utils.torch_setup import setup_torch
 import torch
-from transformers import AutoTokenizer, AutoModel, AutoProcessor
+from transformers import AutoTokenizer, AutoModel
 import torchvision.transforms as T
 from torchvision.transforms.functional import InterpolationMode
 from PIL import Image
