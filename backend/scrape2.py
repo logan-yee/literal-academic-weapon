@@ -6,7 +6,7 @@ print("Python Executable:", sys.executable)
 
 # Canvas API URL and token
 API_URL = "https://learn.ontariotechu.ca/api/v1"
-API_TOKEN = "13377~xthwTz8hxxZBNKtZykNvLkvBzmhfktQt9ECyYN8k6U6uukCn3NwBnycu4GzhfQkN"
+API_TOKEN = "" #Insert API token !!!!!!!!!!!!!!!!!!!!!!!
 
 headers = {
     "Authorization": f"Bearer {API_TOKEN}",
