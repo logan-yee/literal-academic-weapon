@@ -6,6 +6,13 @@ sys.path.append(str(Path(__file__).parent))
 from utils.torch_setup import setup_torch
 import torch
 from transformers import AutoTokenizer, AutoModel, AutoProcessor
+import torchvision.transforms as T
+from torchvision.transforms.functional import InterpolationMode
+from PIL import Image
+
+# Image Preprocessing Constants
+IMAGENET_MEAN = (0.485, 0.456, 0.406)
+IMAGENET_STD = (0.229, 0.224, 0.225)
 
 # Set up logging
 logging.basicConfig(
@@ -34,6 +41,76 @@ def check_gpu_memory() -> Tuple[float, float]:
         return allocated, total
     return 0.0, 0.0
 
+def build_transform(input_size):
+    """Build image transformation pipeline."""
+    transform = T.Compose([
+        T.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),
+        T.Resize((input_size, input_size), interpolation=InterpolationMode.BICUBIC),
+        T.ToTensor(),
+        T.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD)
+    ])
+    return transform
+
+def find_closest_aspect_ratio(aspect_ratio, target_ratios, width, height, image_size):
+    """Find the closest matching aspect ratio for image processing."""
+    best_ratio_diff = float('inf')
+    best_ratio = (1, 1)
+    area = width * height
+    for ratio in target_ratios:
+        target_aspect_ratio = ratio[0] / ratio[1]
+        ratio_diff = abs(aspect_ratio - target_aspect_ratio)
+        if ratio_diff < best_ratio_diff:
+            best_ratio_diff = ratio_diff
+            best_ratio = ratio
+        elif ratio_diff == best_ratio_diff:
+            if area > 0.5 * image_size * image_size * ratio[0] * ratio[1]:
+                best_ratio = ratio
+    return best_ratio
+
+def dynamic_preprocess(image, min_num=1, max_num=12, image_size=448, use_thumbnail=False):
+    """Dynamically preprocess image based on aspect ratio."""
+    orig_width, orig_height = image.size
+    aspect_ratio = orig_width / orig_height
+    target_ratios = set(
+        (i, j) for n in range(min_num, max_num + 1) 
+        for i in range(1, n + 1) 
+        for j in range(1, n + 1) 
+        if i * j <= max_num and i * j >= min_num
+    )
+    target_ratios = sorted(target_ratios, key=lambda x: x[0] * x[1])
+    target_aspect_ratio = find_closest_aspect_ratio(
+        aspect_ratio, target_ratios, orig_width, orig_height, image_size)
+    
+    target_width = image_size * target_aspect_ratio[0]
+    target_height = image_size * target_aspect_ratio[1]
+    blocks = target_aspect_ratio[0] * target_aspect_ratio[1]
+    resized_img = image.resize((target_width, target_height))
+    
+    processed_images = []
+    for i in range(blocks):
+        box = (
+            (i % (target_width // image_size)) * image_size,
+            (i // (target_width // image_size)) * image_size,
+            ((i % (target_width // image_size)) + 1) * image_size,
+            ((i // (target_width // image_size)) + 1) * image_size
+        )
+        split_img = resized_img.crop(box)
+        processed_images.append(split_img)
+    
+    if use_thumbnail and len(processed_images) != 1:
+        thumbnail_img = image.resize((image_size, image_size))
+        processed_images.append(thumbnail_img)
+    return processed_images
+
+def load_image(image_file, input_size=448, max_num=12):
+    """Load and preprocess image."""
+    image = Image.open(image_file).convert('RGB')
+    transform = build_transform(input_size=input_size)
+    images = dynamic_preprocess(image, image_size=input_size, use_thumbnail=True, max_num=max_num)
+    pixel_values = [transform(image) for image in images]
+    pixel_values = torch.stack(pixel_values)
+    return pixel_values
+
 def load_internvl_model():
     """
     Loads and optimizes the InternVL2.5-2B-MPO model specifically for image analysis and chat.
@@ -48,103 +125,31 @@ def load_internvl_model():
         Exception: For other unexpected errors
     """
     try:
-        logger.info("Starting model loading process...")
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        logger.info(f"Using device: {device}")
         
-        # Set up CUDA
-        device, is_cuda_available, cuda_device_name = setup_torch()
-        logger.info(f"CUDA available: {is_cuda_available}, Device: {cuda_device_name}")
+        # Load model and tokenizer
+        model_path = "OpenGVLab/InternVL2_5-2B-MPO"
         
-        if is_cuda_available:
-            allocated_mem, total_mem = check_gpu_memory()
-            logger.info(f"Initial GPU Memory - Allocated: {allocated_mem:.2f}GB, Total: {total_mem:.2f}GB")
+        model = AutoModel.from_pretrained(
+            model_path,
+            torch_dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+            use_flash_attn=True,
+            trust_remote_code=True
+        ).eval().to(device)
         
-        path = "OpenGVLab/InternVL2_5-2B-MPO"
+        tokenizer = AutoTokenizer.from_pretrained(
+            model_path, 
+            trust_remote_code=True, 
+            use_fast=False
+        )
         
-        # Model configuration
-        model_kwargs = {
-            "torch_dtype": torch.bfloat16,
-            "low_cpu_mem_usage": True,
-            "trust_remote_code": True
-        }
-        
-        if is_cuda_available:
-            model_kwargs.update({
-                "use_flash_attn": True,
-                "device_map": "auto",
-                "max_memory": None,
-                "offload_folder": "offload"
-            })
-            logger.info(f"Using CUDA optimizations with settings: {model_kwargs}")
-        
-        # Load model with error handling
-        try:
-            logger.info("Loading model...")
-            model = AutoModel.from_pretrained(path, **model_kwargs)
-            logger.info("Model loaded successfully")
-        except Exception as e:
-            logger.error(f"Failed to load model: {str(e)}")
-            raise ModelLoadError(f"Model loading failed: {str(e)}")
-        
-        if is_cuda_available:
-            try:
-                model = model.eval().cuda()
-                torch.backends.cudnn.benchmark = True
-                torch.backends.cuda.matmul.allow_tf32 = True
-                logger.info("Model moved to CUDA and optimizations enabled")
-            except RuntimeError as e:
-                logger.error(f"CUDA error: {str(e)}")
-                raise
-        else:
-            model = model.eval()
-        
-        # Load tokenizer
-        try:
-            logger.info("Loading tokenizer...")
-            tokenizer = AutoTokenizer.from_pretrained(
-                path,
-                trust_remote_code=True,
-                use_fast=False,
-                model_max_length=512
-            )
-            logger.info("Tokenizer loaded successfully")
-        except Exception as e:
-            logger.error(f"Failed to load tokenizer: {str(e)}")
-            raise ModelLoadError(f"Tokenizer loading failed: {str(e)}")
-        
-        # Load processor
-        try:
-            logger.info("Loading processor...")
-            processor = AutoProcessor.from_pretrained(
-                path,
-                trust_remote_code=True,
-                do_resize=True,
-                size={"height": 224, "width": 224},
-                do_normalize=True
-            )
-            logger.info("Processor loaded successfully")
-        except Exception as e:
-            logger.error(f"Failed to load processor: {str(e)}")
-            raise ModelLoadError(f"Processor loading failed: {str(e)}")
-        
-        # Pre-warm model
-        if is_cuda_available:
-            try:
-                logger.info("Pre-warming model...")
-                dummy_input = torch.zeros(1, 3, 224, 224, device=device, dtype=torch.bfloat16)
-                with torch.no_grad():
-                    _ = model(dummy_input)
-                logger.info("Model pre-warming completed")
-            except Exception as e:
-                logger.warning(f"Pre-warming failed (non-critical): {str(e)}")
-            
-            # Log final memory usage
-            allocated_mem, total_mem = check_gpu_memory()
-            logger.info(f"Final GPU Memory - Allocated: {allocated_mem:.2f}GB, Total: {total_mem:.2f}GB")
-        
-        return model, tokenizer, processor, device
+        logger.info("Successfully loaded InternVL model and tokenizer")
+        return model, tokenizer, None, device  # Return None for processor to maintain compatibility
         
     except Exception as e:
-        logger.error(f"Unexpected error during model loading: {str(e)}", exc_info=True)
+        logger.error(f"Error loading InternVL model: {e}")
         raise
 
 def cleanup_model(model: Optional[AutoModel] = None) -> None:

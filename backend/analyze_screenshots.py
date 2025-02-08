@@ -1,283 +1,169 @@
-from celery import Celery, chain
-from transformers import AutoProcessor, VisionEncoderDecoderModel, pipeline
-from PIL import Image
-from langchain_core.prompts import PromptTemplate
-from langchain.chains import LLMChain
-from langchain_community.llms import Ollama
-from internvl_loader import load_internvl_model, cleanup_model, get_model_info
-import torch
+import warnings
 import logging
+import json
+from PIL import Image
+import torch
 
-# Set up logging
+# Filter out specific warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=UserWarning)
+logging.getLogger("transformers").setLevel(logging.ERROR)
+
+# Import LangChain components for prompt building and LLM chaining.
+from langchain_core.prompts import PromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_community.llms import Ollama as OllamaLLM
+
+# Import the InternVL model loader and cleanup helpers.
+from internvl_loader import load_internvl_model, load_image, cleanup_model
+
+# -------------------------------
+# Setup Logging
+# -------------------------------
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('internvl.log'),
-        logging.StreamHandler()
-    ]
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
 # -------------------------------
-# Celery Configuration
-# -------------------------------
-
-app = Celery(
-    'ocr_pipeline',
-    broker='redis://localhost:6379/0',
-    backend='redis://localhost:6379/0'
-)
-
-# -------------------------------
 # Global Model Loading
 # -------------------------------
-
-# Load the InternVL model, tokenizer, processor, and device
 try:
-    model, tokenizer, processor, device = load_internvl_model()
-    
-    # Get model information
-    model_info = get_model_info(model)
-    logger.info(f"Model information: {model_info}")
-    
-    # Initialize Ollama for both preconditioning and classification
-    llm = Ollama(model="llama3.1", temperature=0.3, base_url="http://localhost:11434")
+    # Load InternVL and its tokenizer
+    internvl_model, tokenizer, device, *_ = load_internvl_model()
+    logger.info("InternVL Model loaded successfully")
 
-    # Define classification prompt template
+    # Initialize Llama via Ollama 
+    llm = OllamaLLM(model="llama2", temperature=0.3)
+    
+    # Define output parser
+    json_parser = JsonOutputParser()
+
+    # Define a prompt template for classification
     classification_prompt = PromptTemplate(
-        input_variables=["text", "image_description"],
+        input_variables=["extracted_text", "definition"],
         template=(
-            "You are analyzing a screenshot with the following elements:\n"
-            "1. Visual Description: {image_description}\n"
-            "2. Extracted Text Content: {text}\n\n"
-            "Based on both the visual context and text content, identify key elements and classify them.\n"
-            "Consider:\n"
-            "- The type of application or website visible\n"
-            "- The nature of the content (work, entertainment, social, etc.)\n"
-            "- Any visible UI elements or interactions\n\n"
-            "Return the result as a JSON object with:\n"
-            "- 'label': either 'productive' or 'procrastination'\n"
-            "- 'score': confidence between 0 and 1\n"
-            "- 'keywords': list of identified elements and their classifications\n"
-            "- 'context': brief explanation of the classification\n\n"
+            "Analyze the following screenshot description:\n"
+            "{extracted_text}\n\n"
+            "Based on this definition of procrastination:\n"
+            "{definition}\n\n"
+            "Determine if the screenshot indicates procrastination or productive behavior. "
+            "Return your analysis as a JSON object with:\n"
+            "  - 'label': either 'procrastination' or 'productive'\n"
+            "  - 'score': a confidence score between 0 and 1\n"
+            "  - 'reasoning': a brief explanation of your decision.\n\n"
             "JSON Response:"
         )
     )
 
-    classification_chain = LLMChain(prompt=classification_prompt, llm=llm)
-
-    # -------------------------------
-    # LangChain Preconditioning Setup with Ollama
-    # -------------------------------
-    # Define a prompt template that uses a context (JSON or prompt) and the extracted text.
-    prompt_template = PromptTemplate(
-        input_variables=["context", "extracted_text"],
-        template=(
-            "Using the following context: {context}\n"
-            "And the extracted text: {extracted_text}\n"
-            "Return a preconditioned version of the text that emphasizes the given context."
-        )
+    # Create modern chain
+    classification_chain = (
+        RunnablePassthrough() 
+        | classification_prompt 
+        | llm 
+        | json_parser
     )
 
-    # Create a LangChain LLMChain using the prompt template and the Ollama LLM.
-    llm_chain = LLMChain(prompt=prompt_template, llm=llm)
-
-    def generate_preconditioned_text(context_input, extracted_text):
-        """
-        Uses LangChain (with Ollama) to generate a modified version of the extracted text
-        based on the provided context.
-        """
-        return llm_chain.run(context=context_input, extracted_text=extracted_text)
-
-    # -------------------------------
-    # Task 1: InternVL OCR Agent Task
-    # -------------------------------
-    @app.task
-    def internvl_ocr_task(image_path):
-        """
-        Uses InternVL2.5-2B-MPO to extract text and analyze image content.
-        """
-        print("\n[Step 1] Starting image analysis...")
-        
-        try:
-            # Load and process the image
-            image = Image.open(image_path).convert("RGB")
-            pixel_values = processor(images=image, return_tensors="pt").to(device, dtype=torch.bfloat16)
-            
-            # Generate the description using the chat method
-            question = "<image>\nPlease describe what you see in this image, focusing on any text content."
-            with torch.no_grad():  # Ensure inference mode
-                response = model.chat(
-                    tokenizer, 
-                    pixel_values, 
-                    question,
-                    generation_config=dict(
-                        max_new_tokens=1024,
-                        do_sample=True,
-                        temperature=0.7,  # Adjust for creativity vs accuracy
-                        num_beams=1  # Faster generation
-                    )
-                )
-            
-            print(f"[Step 1] Extracted content: {response[:100]}...")
-            return response
-            
-        except Exception as e:
-            print(f"[Step 1] Error in image analysis: {str(e)}")
-            return f"Error analyzing image: {str(e)}"
-        
-        finally:
-            # Clean up GPU memory if needed
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
-
-    # -------------------------------
-    # Task 2: Preconditioning Task Using LangChain with Ollama
-    # -------------------------------
-    @app.task
-    def precondition_text_classifier_task(extracted_text, context_input):
-        """
-        Preconditions the extracted text using a JSON input or prompt.
-        This simulates training or context adjustment before classification.
-        Uses LangChain with an Ollama-served LLM.
-        """
-        print("\n[Step 2] Starting text preconditioning...")
-        modified_text = generate_preconditioned_text(context_input, extracted_text)
-        print(f"[Step 2] Modified text: {modified_text[:100]}...")  # Show first 100 chars
-        return modified_text
-
-    # -------------------------------
-    # Task 3: Llama Text Analysis Task
-    # -------------------------------
-    @app.task
-    def llama_text_classification_task(modified_text, original_image_description):
-        """
-        Uses Ollama's llama2 model to analyze text and classify keywords as productive or procrastination.
-        Now includes both the modified text and original image description for better context.
-        """
-        print("\n[Step 3] Starting text classification...")
-        
-        try:
-            # Get classification result using both text and image description
-            result_str = classification_chain.run(
-                text=modified_text,
-                image_description=original_image_description
-            )
-            
-            # Parse the JSON response
-            import json
-            result = json.loads(result_str)
-            
-            print(f"[Step 3] Classification result: {result}")
-            return {
-                "label": result.get("label", "unknown"),
-                "score": result.get("score", 0.0),
-                "keywords": result.get("keywords", []),
-                "context": result.get("context", "No context provided")
-            }
-        except Exception as e:
-            print(f"[Step 3] Error in classification: {str(e)}")
-            return {
-                "label": "error",
-                "score": 0.0,
-                "keywords": [],
-                "context": f"Error during classification: {str(e)}"
-            }
-
-    # -------------------------------
-    # Task 4: Refinement Agent Task
-    # -------------------------------
-    @app.task
-    def refinement_agent_task(classification_result):
-        """
-        Invoked when the confidence is low.
-        Flags the classification result for further review.
-        """
-        flagged_result = {
-            "label": classification_result["label"],
-            "confidence": classification_result["score"],
-            "flag": True,
-            "message": "Low confidence - requires further review."
-        }
-        return flagged_result
-
-    # -------------------------------
-    # Task 5: Decision Aggregator Task
-    # -------------------------------
-    @app.task
-    def decision_aggregator_task(classification_result):
-        """
-        Aggregates the classification result. If the confidence is below a threshold,
-        calls the refinement agent.
-        """
-        print("\n[Step 4] Starting decision aggregation...")
-        CONFIDENCE_THRESHOLD = 0.75
-        if classification_result["score"] < CONFIDENCE_THRESHOLD:
-            print("[Step 4] Low confidence detected, invoking refinement agent...")
-            flagged_result = refinement_agent_task.delay(classification_result).get()
-            final_decision = flagged_result
-        else:
-            print("[Step 4] Confidence threshold met, accepting classification...")
-            final_decision = {
-                "label": classification_result["label"],
-                "confidence": classification_result["score"],
-                "flag": False,
-                "message": "Classification accepted."
-            }
-        print(f"[Step 4] Final decision: {final_decision}")
-        return final_decision
-
-    # -------------------------------
-    # Pipeline Runner Function
-    # -------------------------------
-    def run_pipeline(image_path, context_input):
-        """
-        Enhanced pipeline that maintains the image description context throughout the process.
-        """
-        print("\n=== Starting Pipeline ===")
-        print(f"Image path: {image_path}")
-        print(f"Context input: {context_input}")
-        
-        # Step 1: Get OCR and image description
-        ocr_result = internvl_ocr_task.delay(image_path).get()
-        
-        # Step 2: Precondition the text
-        preconditioned_text = precondition_text_classifier_task.delay(
-            ocr_result, 
-            context_input
-        ).get()
-        
-        # Step 3: Classify with both text and original description
-        classification_result = llama_text_classification_task.delay(
-            preconditioned_text,
-            ocr_result  # Pass the original image description
-        ).get()
-        
-        # Step 4: Aggregate decision
-        final_decision = decision_aggregator_task.delay(classification_result).get()
-        
-        print("\n=== Pipeline Complete ===")
-        return final_decision
-
-    # -------------------------------
-    # For Testing the Pipeline
-    # -------------------------------
-    if __name__ == '__main__':
-
-        # Replace with the actual path to your image file.
-        image_path = "./screenshots/screenshot_2025-01-01_18-33-51.png"
-        # Provide a JSON input or prompt that defines what constitutes procrastination.
-        context_input = '{"definition": "Procrastination includes social media, entertainment, and non-study activities."}'
-        
-        final_output = run_pipeline(image_path, context_input)
-        print("Final Output:", final_output)
-
-    print(f"CUDA available: {torch.cuda.is_available()}")
-    print(f"CUDA version: {torch.version.cuda}")
-
 except Exception as e:
-    logger.error(f"Error in pipeline: {str(e)}", exc_info=True)
-finally:
-    # Cleanup
-    cleanup_model(model)
+    logger.error(f"Error loading models: {e}")
+    raise
+
+# -------------------------------
+# Step 1: InternVL OCR Function
+# -------------------------------
+def internvl_ocr(image_path):
+    """
+    Loads the image and uses InternVL to generate an image description.
+    Focuses on extracting textual content from the screenshot.
+    
+    :param image_path: Path to the screenshot image.
+    :return: A string description of the image.
+    """
+    try:
+        # Process image
+        pixel_values = load_image(image_path, max_num=12).to(torch.bfloat16).to(device)
+        
+        # Create text prompt
+        prompt = "<image>\nPlease describe this screenshot in detail, focusing on any visible text content."
+        
+        # Generate response
+        generation_config = dict(max_new_tokens=512, do_sample=True, temperature=0.7)
+        response = internvl_model.chat(tokenizer, pixel_values, prompt, generation_config)
+        
+        logger.info(f"OCR result: {response[:100]}...")
+        return response
+
+    except Exception as e:
+        logger.error(f"Error in internvl_ocr: {e}")
+        raise
+
+    finally:
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+# -------------------------------
+# Step 2: Llama Classification Function
+# -------------------------------
+def llama_classification(ocr_result, definition):
+    """
+    Uses Llama 2 (via Ollama) to classify the image description.
+    
+    :param ocr_result: The text output from InternVL.
+    :param definition: A string (or JSON string) defining what constitutes procrastination.
+    :return: A JSON object with classification details.
+    """
+    try:
+        result = classification_chain.invoke({
+            "extracted_text": ocr_result,
+            "definition": definition
+        })
+        logger.info(f"Classification result: {result}")
+        return result
+
+    except Exception as e:
+        logger.error(f"Error in llama_classification: {e}")
+        return {"label": "error", "score": 0.0, "reasoning": f"Error: {e}"}
+
+# -------------------------------
+# Pipeline Runner Function
+# -------------------------------
+def run_pipeline(image_path, definition):
+    """
+    Runs the pipeline by first extracting text from the image and then classifying the result.
+    
+    :param image_path: Path to the screenshot image.
+    :param definition: User input defining what constitutes procrastination.
+    :return: Final classification result as a JSON object.
+    """
+    logger.info("=== Starting Pipeline ===")
+    logger.info(f"Image path: {image_path}")
+    logger.info(f"Definition: {definition}")
+
+    # Step 1: Extract text description from the image.
+    ocr_result = internvl_ocr(image_path)
+    print("\nInternVL Output:", ocr_result, "\n")
+    
+    # Step 2: Classify the extracted text.
+    classification_result = llama_classification(ocr_result, definition)
+
+    logger.info("=== Pipeline Complete ===")
+    return classification_result
+
+# -------------------------------
+# Main Execution
+# -------------------------------
+if __name__ == '__main__':
+    # Example usage:
+    image_path = "backend/screenshots/screenshot_2025-01-01_18-33-51.png"
+    
+    # Provide a JSON string (or plain text) that defines what constitutes procrastination.
+    definition = '{"definition": "Procrastination includes social media, entertainment, and non-study activities."}'
+    
+    # Run the pipeline synchronously.
+    final_output = run_pipeline(image_path, definition)
+    print("Final Output:", final_output)
+    
+    # Cleanup resources.
+    cleanup_model(internvl_model)
