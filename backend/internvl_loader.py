@@ -13,15 +13,16 @@ from PIL import Image
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
-# Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('internvl.log'),
-        logging.StreamHandler()
-    ]
-)
+# Only configure if no handlers exist
+if not logging.root.handlers:
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('internvl.log'),
+            logging.StreamHandler()
+        ]
+    )
 logger = logging.getLogger(__name__)
 
 class ModelLoadError(Exception):
@@ -128,7 +129,7 @@ def load_internvl_model():
         logger.info(f"Using device: {device}")
         
         # Load model and tokenizer
-        model_path = "OpenGVLab/InternVL2_5-2B-MPO"
+        model_path = "OpenGVLab/InternVL2_5-1B-MPO"
         
         model = AutoModel.from_pretrained(
             model_path,

@@ -1,21 +1,18 @@
 [
     {
         "Timestamp": "2024-02-08 09:00:00",
-        "Website": "www.khanacademy.org",
         "Content": "Studying math lessons",
         "Justification": "Educational website for learning calculus",
         "Verdict": false
     },
     {
         "Timestamp": "2024-02-08 10:30:00",
-        "Website": "www.youtube.com",
         "Content": "Watching random videos",
         "Justification": "Not related to study, potential distraction",
         "Verdict": true
     },
     {
         "Timestamp": "2024-02-08 13:00:00",
-        "Website": "www.github.com",
         "Content": "Working on a coding project",
         "Justification": "Programming and software development",
         "Verdict": false

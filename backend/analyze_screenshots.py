@@ -3,6 +3,8 @@ import logging
 import json
 from PIL import Image
 import torch
+from datetime import datetime
+import os
 
 # Filter out specific warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -18,12 +20,21 @@ from langchain_community.llms import Ollama as OllamaLLM
 # Import the InternVL model loader and cleanup helpers.
 from internvl_loader import load_internvl_model, load_image, cleanup_model
 
-# -------------------------------
-# Setup Logging
-# -------------------------------
+# At the top of the file, update the logging configuration
+import logging
+
+# Clear any existing handlers to prevent duplication
+for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+
+# Configure logging once
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('analyze.log'),
+        logging.StreamHandler()
+    ]
 )
 logger = logging.getLogger(__name__)
 
@@ -49,10 +60,9 @@ try:
             "{extracted_text}\n\n"
             "Based on this definition of procrastination:\n"
             "{definition}\n\n"
-            "Determine if the screenshot indicates procrastination or productive behavior. "
+            "Focus on analyzing the primary content of the screenshot. Be very strict with your analysis. Determine if the screenshot indicates procrastination or productive behavior, based on the definition of procrastination."
             "Return your analysis as a JSON object with:\n"
             "  - 'label': either 'procrastination' or 'productive'\n"
-            "  - 'score': a confidence score between 0 and 1\n"
             "  - 'reasoning': a brief explanation of your decision.\n\n"
             "JSON Response:"
         )
@@ -115,16 +125,42 @@ def llama_classification(ocr_result, definition):
     :return: A JSON object with classification details.
     """
     try:
+        # Get classification from Llama
         result = classification_chain.invoke({
             "extracted_text": ocr_result,
             "definition": definition
         })
-        logger.info(f"Classification result: {result}")
-        return result
+        
+        # Format the result in the desired structure
+        formatted_result = {
+            "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Content": ocr_result[:100],  # First 100 chars of content
+            "Justification": result.get("reasoning", "No reasoning provided"),
+            "Verdict": result.get("label") == "procrastination"
+        }
+        
+        # Create analyses directory if it doesn't exist
+        os.makedirs("analyses", exist_ok=True)
+        
+        # Generate filename with timestamp
+        filename = f"analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        filepath = os.path.join("analyses", filename)
+        
+        # Save to JSON file
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(formatted_result, f, indent=4)
+            
+        logger.info(f"Analysis saved to {filepath}")
+        return formatted_result
 
     except Exception as e:
         logger.error(f"Error in llama_classification: {e}")
-        return {"label": "error", "score": 0.0, "reasoning": f"Error: {e}"}
+        return {
+            "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "Content": "Error processing content",
+            "Justification": f"Error: {str(e)}",
+            "Verdict": False
+        }
 
 # -------------------------------
 # Pipeline Runner Function
@@ -132,21 +168,18 @@ def llama_classification(ocr_result, definition):
 def run_pipeline(image_path, definition):
     """
     Runs the pipeline by first extracting text from the image and then classifying the result.
-    
-    :param image_path: Path to the screenshot image.
-    :param definition: User input defining what constitutes procrastination.
-    :return: Final classification result as a JSON object.
     """
     logger.info("=== Starting Pipeline ===")
     logger.info(f"Image path: {image_path}")
     logger.info(f"Definition: {definition}")
 
-    # Step 1: Extract text description from the image.
+    # Step 1: Extract text description from the image
     ocr_result = internvl_ocr(image_path)
-    print("\nInternVL Output:", ocr_result, "\n")
+    logger.debug(f"InternVL Output: {ocr_result}")  # Changed to debug level
     
-    # Step 2: Classify the extracted text.
+    # Step 2: Classify the extracted text
     classification_result = llama_classification(ocr_result, definition)
+    logger.info(f"Classification result: {classification_result}")
 
     logger.info("=== Pipeline Complete ===")
     return classification_result
