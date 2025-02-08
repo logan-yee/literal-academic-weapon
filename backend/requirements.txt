@@ -1,5 +1,11 @@
+celery
+redis
+transformers
+torch
 Pillow
 requests
-langchain-ollama
 langchain
+langchain-community
+langchain-core
+langchain-ollama
 plyer

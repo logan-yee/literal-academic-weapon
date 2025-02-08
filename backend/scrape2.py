@@ -1,6 +1,7 @@
 import sys
 import json
 import requests
+import torch
 
 print("Python Executable:", sys.executable)
 
@@ -104,6 +105,11 @@ def get_assignments(course_id):
         print(f"Failed to fetch assignments (HTTP {response.status_code})")
         print("Response Content:", response.text)
         return None
+
+def clear_gpu_memory():
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        torch.cuda.synchronize()
 
 # Main workflow
 if __name__ == "__main__":
