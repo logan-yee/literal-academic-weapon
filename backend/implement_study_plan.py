@@ -58,7 +58,7 @@ def create_study_schedule(analyses):
     1. Identify productive and procrastination hours using the "Verdict" field.
     2. Allocate focused study time in 1-hour intervals during productive hours.
     3. Ensure total study time is at least {hours} hours.
-    4. If the total study time is less than {hours} hours, suggest additional study hours during procrastination hours.
+    4. If the provided study time is less than {hours} hours, suggest additional study hours during procrastination hours.
 
     Data collected from user's screen activity:
     {analysis_data}
