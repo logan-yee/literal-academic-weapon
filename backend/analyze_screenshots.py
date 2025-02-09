@@ -253,5 +253,3 @@ if __name__ == '__main__':
         logger.error(f"Error in main loop: {e}")
         # Cleanup resources
         cleanup_model(internvl_model)
-
-
