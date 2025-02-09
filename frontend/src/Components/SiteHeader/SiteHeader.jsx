@@ -1,11 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./SiteHeader.css"
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,23 @@ export function SiteHeader() {
       document.removeEventListener("scroll", handleScroll)
     }
   }, [scrolled])
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token')
+      setIsAuthenticated(!!token)
+    }
+    
+    checkAuth()
+  }, [])
+
+  const handleAccountClick = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard')
+    } else {
+      navigate('/LoginSignup')
+    }
+  }
 
   return (
     <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
@@ -55,10 +74,12 @@ export function SiteHeader() {
           </Link>
         </div>
         <div className="header-right">
-          <Link to="/login" className="login-link">
-            Log in
-          </Link>
-          <button className="button button-primary">Go to my account</button>
+          <button 
+            className="button button-primary"
+            onClick={handleAccountClick}
+          >
+            {isAuthenticated ? 'Go to my Dashboard' : 'Log in'}
+          </button>
           <button className="menu-button">
             <span className="menu-icon">☰</span>
           </button>
