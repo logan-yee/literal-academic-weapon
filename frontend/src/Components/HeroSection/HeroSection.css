@@ -47,8 +47,35 @@
   }
   
   .content-grid {
-    display: grid;
-    gap: 3rem;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  
+  .content-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 300%; /* 100% for each slide */
+  }
+  
+  .content-slide {
+    display: flex;
+    width: 33.333%; /* One third of the slider width */
+    padding: 0 20px;
+    opacity: 1;
+  }
+  
+  /* Position slides based on active tab */
+  .content-slider.projects {
+    transform: translateX(0);
+  }
+  
+  .content-slider.about {
+    transform: translateX(-33.333%);
+  }
+  
+  .content-slider.processes {
+    transform: translateX(-66.666%);
   }
   
   .content-left {
@@ -89,6 +116,48 @@
     height: auto;
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content-slide.processes .hero-image {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    margin: right;
+  }
+  
+  .content-slide.processes .content-center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .content-slide.processes .content-heading {
+    margin-bottom: 2rem; 
+  }
+  
+
+  .tech-list {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .tech-items {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .tech-items li {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+  }
+  
+  .text-center {
+    text-align: center;
   }
   
   @media (min-width: 768px) {
