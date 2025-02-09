@@ -10,7 +10,7 @@ export function Sidebar() {
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link to="/dashboard/statistics">Statistics</Link>
+            <Link to="/stats">Statistics</Link>
           </li>
           <li>
             <Link to="/dashboard/profile">Profile</Link>

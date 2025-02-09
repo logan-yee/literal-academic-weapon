@@ -4,6 +4,7 @@ import { HeroSection } from "./Components/HeroSection/HeroSection"
 import { Dashboard } from "./Components/Dashboard/Dashboard"
 import "./App.css"
 import LoginSignup from "./Components/LoginSignup/LoginSignup"
+import Stats from "./Components/Stats/Stats"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/LoginSignup" element={<LoginSignup />} />
+          <Route path="/stats" element={<Stats />} />
         </Routes>
       </div>
     </Router>
