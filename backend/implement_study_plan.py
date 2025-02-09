@@ -44,7 +44,7 @@ def load_analyses_from_directory(directory_path):
     return all_analyses
 
 
-# Generate a study schedule using Ollama RAG
+# Generate a study schedule using Ollama
 def create_study_schedule(analyses):
     analysis_data = "\n".join([json.dumps(analysis) for analysis in analyses])  # Convert JSON to string format
 

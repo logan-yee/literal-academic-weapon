@@ -1,2 +1,4 @@
 .venv/
 .internvl.log
+.analyze.log
+backend/screenshots/
