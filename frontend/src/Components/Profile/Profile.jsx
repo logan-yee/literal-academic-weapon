@@ -12,7 +12,6 @@ const Profile = () => {
     if (!token) {
       navigate('/login');
     } else {
-      // In your system, the username is hardcoded as "Naufil"
       setUsername("Naufil");
     }
   }, [navigate]);
