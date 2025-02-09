@@ -9,6 +9,7 @@ from screenshot_taker import capture_screenshot
 
 # Import the voice notification module
 from voice_notification import speak
+from plyer import notification  # Add this import at the top with other imports
 
 # Filter out specific warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -52,7 +53,9 @@ def create_definition(study_topic: str) -> str:
     """
     base_definition = "Procrastination includes social media, entertainment, "
     return (f'{{"definition": "{base_definition} and any activities unrelated to {study_topic}. '
-            f'Productive behavior includes activities related to studying/working on {study_topic}"}}')
+            f'Productive behavior includes activities related to studying/working on {study_topic}.'
+            f'Do not include any other activities in your definition."}}')
+
 
 # -------------------------------
 # Global Model Loading
@@ -200,10 +203,18 @@ def run_pipeline(image_path, definition):
 
     # Check if procrastination was detected
     if classification_result[0]["Verdict"]:
-        logger.info("Procrastination detected - triggering voice notification")
+        logger.info("Procrastination detected - triggering notifications")
+        # Send both system notification and voice notification
+        notification.notify(
+            title='Procrastination Alert!',
+            message='You have been caught procrastinating. Time to get back to work!',
+            app_icon=None,
+            timeout=10,
+        )
         speak("You have been caught procrastinating, please look at the schedule your AI assistant to make you an academic weapon.")
+
     else:
-        logger.info("No procrastination detected - no voice notification")
+        logger.info("No procrastination detected - no notifications")
 
     logger.info("=== Pipeline Complete ===")
     return classification_result
@@ -237,7 +248,7 @@ def get_latest_screenshot():
 # -------------------------------
 if __name__ == '__main__':
     # Get user input for study topic (only once at start)
-    study_topic = "Programming"
+    study_topic = "Fiction Literature"
     
     # Create the full definition
     definition = create_definition(study_topic)

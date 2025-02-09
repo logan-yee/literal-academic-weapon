@@ -166,3 +166,83 @@
 2025-02-08 21:52:46,660 - __main__ - INFO - Waiting 10 minutes before next screenshot...
 2025-02-08 21:52:50,076 - __main__ - INFO - Screenshot analysis stopped by user
 2025-02-08 21:52:50,076 - utils.internvl_loader - INFO - Starting model cleanup...
+2025-02-09 00:22:07,813 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 00:22:08,036 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 00:22:08,037 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 00:22:08,037 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 00:22:08,037 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 00:22:15,559 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 00:22:15,559 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 00:22:16,148 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 00:22:16,149 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-09 00:22:16,454 - __main__ - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_00-22-16.png
+2025-02-09 00:22:16,454 - __main__ - INFO - === Starting Pipeline ===
+2025-02-09 00:22:16,454 - __main__ - INFO - Image path: backend/screenshots/screenshot_2025-02-09_00-22-16.png
+2025-02-09 00:22:16,454 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Programming. Productive behavior includes activities related to studying/working on Programming"}
+2025-02-09 00:31:47,198 - __main__ - INFO - OCR result: This screenshot shows a Python interactive shell on the JetBrains IDE, likely VSCode. Here's a detai...
+2025-02-09 00:31:59,959 - __main__ - ERROR - Error in llama_classification: Invalid json output: After analyzing the screenshot content, I conclude that:
+
+**Label:** productive
+**Reasoning:** The code snippets provided are related to programming, specifically involving Python and AI-related libraries. The presence of `analyze_screenshots.py` and `callback.py` files suggests that the user is engaged in coding activities, which aligns with the definition of productive behavior.
+
+The terminal output also indicates that dependencies are being installed for an app, which further supports the conclusion that the user is engaging in programming-related tasks. There is no indication of social media, entertainment, or other unrelated activities, which would suggest procrastination.
+
+Therefore, based on the provided code snippets and terminal output, I classify this screenshot as indicative of **productive behavior**.
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
+2025-02-09 00:31:59,960 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-09 00:31:59', 'Content': 'Error processing content', 'Justification': 'Error: Invalid json output: After analyzing the screenshot content, I conclude that:\n\n**Label:** productive\n**Reasoning:** The code snippets provided are related to programming, specifically involving Python and AI-related libraries. The presence of `analyze_screenshots.py` and `callback.py` files suggests that the user is engaged in coding activities, which aligns with the definition of productive behavior.\n\nThe terminal output also indicates that dependencies are being installed for an app, which further supports the conclusion that the user is engaging in programming-related tasks. There is no indication of social media, entertainment, or other unrelated activities, which would suggest procrastination.\n\nTherefore, based on the provided code snippets and terminal output, I classify this screenshot as indicative of **productive behavior**.\nFor troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE ', 'Verdict': False}]
+2025-02-09 00:31:59,960 - __main__ - INFO - No procrastination detected - no voice notification
+2025-02-09 00:31:59,960 - __main__ - INFO - === Pipeline Complete ===
+2025-02-09 00:31:59,962 - __main__ - INFO - Waiting 1 minute before next screenshot...
+2025-02-09 00:33:00,426 - __main__ - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_00-32-59.png
+2025-02-09 00:33:00,427 - __main__ - INFO - === Starting Pipeline ===
+2025-02-09 00:33:00,428 - __main__ - INFO - Image path: backend/screenshots/screenshot_2025-02-09_00-32-59.png
+2025-02-09 00:33:00,428 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Programming. Productive behavior includes activities related to studying/working on Programming"}
+2025-02-09 00:42:25,984 - __main__ - INFO - OCR result: This screenshot is of the homepage of Zara's website, as viewed on a Windows operating system. Here'...
+2025-02-09 00:42:36,939 - __main__ - INFO - Analysis saved to analyses\analysis_20250209_004236.json
+2025-02-09 00:42:36,939 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-09 00:42:36', 'Content': "This screenshot is of the homepage of Zara's website, as viewed on a Windows operating system. Here'", 'Justification': "The primary content of the screenshot appears to be focused on fashion content, specifically showcasing Zara's products and architecture. There are no signs of social media, entertainment, or unrelated activities that would indicate procrastination according to the definition provided. The presence of a search bar and shopping bag icon suggests that the user is engaged with the website's main purpose, which is e-commerce.", 'Verdict': False}]
+2025-02-09 00:42:36,939 - __main__ - INFO - No procrastination detected - no voice notification
+2025-02-09 00:42:36,940 - __main__ - INFO - === Pipeline Complete ===
+2025-02-09 00:42:36,941 - __main__ - INFO - Waiting 1 minute before next screenshot...
+2025-02-09 00:43:00,422 - __main__ - INFO - Screenshot analysis stopped by user
+2025-02-09 00:43:00,422 - utils.internvl_loader - INFO - Starting model cleanup...
+2025-02-09 00:50:45,182 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 00:50:45,343 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 00:50:45,343 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 00:50:45,343 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 00:50:45,343 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 00:50:46,058 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 00:50:46,059 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 00:50:47,244 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 00:50:47,245 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-09 00:50:47,540 - __main__ - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_00-50-47.png
+2025-02-09 00:50:47,540 - __main__ - INFO - === Starting Pipeline ===
+2025-02-09 00:50:47,541 - __main__ - INFO - Image path: backend/screenshots/screenshot_2025-02-09_00-50-47.png
+2025-02-09 00:50:47,541 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Programming. Productive behavior includes activities related to studying/working on Programming.Do not include any other activities in your definition."}
+2025-02-09 00:57:41,862 - __main__ - INFO - OCR result: The screenshot shows a web browser with a focus on a Google search page in the address bar. The URL ...
+2025-02-09 00:57:52,809 - __main__ - INFO - Analysis saved to analyses\analysis_20250209_005752.json
+2025-02-09 00:57:52,809 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-09 00:57:52', 'Content': 'The screenshot shows a web browser with a focus on a Google search page in the address bar. The URL ', 'Justification': "The primary content of the screenshot shows a Google search page with several search results, indicating that the user is actively searching for information. The URL in the address bar suggests that the search query is related to programming (e.g., 'softKnot20 knotSweater' and 'ZLibrary'). Additionally, there are no social media or entertainment-related icons visible on the toolbar or system tray. Therefore, based on the definition of procrastination, this screenshot does not indicate procrastination.", 'Verdict': False}]
+2025-02-09 00:57:52,810 - __main__ - INFO - No procrastination detected - no voice notification
+2025-02-09 00:57:52,810 - __main__ - INFO - === Pipeline Complete ===
+2025-02-09 00:57:52,811 - __main__ - INFO - Waiting 1 minute before next screenshot...
+2025-02-09 00:58:53,265 - __main__ - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_00-58-52.png
+2025-02-09 00:58:53,267 - __main__ - INFO - === Starting Pipeline ===
+2025-02-09 00:58:53,267 - __main__ - INFO - Image path: backend/screenshots/screenshot_2025-02-09_00-58-52.png
+2025-02-09 00:58:53,268 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Programming. Productive behavior includes activities related to studying/working on Programming.Do not include any other activities in your definition."}
+2025-02-09 01:06:06,128 - __main__ - INFO - OCR result: The screenshot shows a YouTube video playing on a computer screen. Here's a detailed description:
+
+-...
+2025-02-09 01:06:17,068 - __main__ - INFO - Analysis saved to analyses\analysis_20250209_010617.json
+2025-02-09 01:06:17,068 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-09 01:06:17', 'Content': "The screenshot shows a YouTube video playing on a computer screen. Here's a detailed description:\n\n-", 'Justification': 'The primary content of the screenshot shows a YouTube video playing on a computer screen, with a paused video and various playback controls. The video title suggests that it is an entertainment video (American Dad Full Episodes). Additionally, the left sidebar displays thumbnails of other videos, which further indicates that the user is engaging in leisure activities rather than studying/working on Programming.', 'Verdict': True}]
+2025-02-09 01:06:17,069 - __main__ - INFO - Procrastination detected - triggering voice notification
+2025-02-09 01:06:17,398 - comtypes.client._code_cache - INFO - Could not import comtypes.gen, trying to create it.
+2025-02-09 01:06:17,399 - comtypes.client._code_cache - INFO - Created comtypes.gen directory: 'C:\Users\logan\Documents\literal-academic-weapon\.venv\Lib\site-packages\comtypes\gen'
+2025-02-09 01:06:17,400 - comtypes.client._code_cache - INFO - Writing __init__.py file: 'C:\Users\logan\Documents\literal-academic-weapon\.venv\Lib\site-packages\comtypes\gen\__init__.py'
+2025-02-09 01:06:17,411 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\logan\Documents\literal-academic-weapon\.venv\Lib\site-packages\comtypes\gen'
+2025-02-09 01:06:17,467 - comtypes.client._generate - INFO - Could not import comtypes.gen._C866CA3A_32F7_11D2_9602_00C04F8EE628_0_5_4: No module named 'comtypes.gen._C866CA3A_32F7_11D2_9602_00C04F8EE628_0_5_4'
+2025-02-09 01:06:17,483 - comtypes.client._generate - INFO - # Generating comtypes.gen._C866CA3A_32F7_11D2_9602_00C04F8EE628_0_5_4
+2025-02-09 01:06:17,531 - comtypes.client._generate - INFO - # Generating comtypes.gen.SpeechLib
+2025-02-09 01:06:17,536 - comtypes.client._generate - INFO - Could not import comtypes.gen._00020430_0000_0000_C000_000000000046_0_2_0: No module named 'comtypes.gen._00020430_0000_0000_C000_000000000046_0_2_0'
+2025-02-09 01:06:17,537 - comtypes.client._generate - INFO - # Generating comtypes.gen._00020430_0000_0000_C000_000000000046_0_2_0
+2025-02-09 01:06:17,542 - comtypes.client._generate - INFO - # Generating comtypes.gen.stdole
+2025-02-09 01:06:18,884 - __main__ - INFO - Screenshot analysis stopped by user
+2025-02-09 01:06:18,884 - utils.internvl_loader - INFO - Starting model cleanup...

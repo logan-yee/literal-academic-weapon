@@ -13,3 +13,4 @@ plyer
 accelerate
 flash-attn
 pyttsx3
+plyer
