@@ -1,31 +1,27 @@
 .dashboard {
-    display: flex;
-    height: calc(100vh - 64px);
-    padding-top: 64px;
-  }
-  
-  .dashboard-main {
-    flex-grow: 1;
-    padding: 2rem;
-    overflow-y: auto;
-  }
-  
-  .start-studying-btn {
-    display: block;
-    margin: 0 auto 2rem;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #6c6cff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .start-studying-btn:hover {
-    background-color: #5a5aff;
-  }
+  height: 100%;
+}
+
+.dashboard-main {
+  padding: 2rem;
+}
+
+.start-studying-btn {
+  display: block;
+  margin: 0 auto 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #6c6cff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.start-studying-btn:hover {
+  background-color: #5a5aff;
+}
   
   

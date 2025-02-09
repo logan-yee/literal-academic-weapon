@@ -1,0 +1,57 @@
+.weekly-calendar {
+    height: calc(100vh - 270px);
+    overflow-y: auto;
+    margin-bottom: 10px;
+  }
+  
+  .week-header {
+    display: grid;
+    grid-template-columns: 100px repeat(7, 1fr);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+  }
+  
+  .day-header {
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+  }
+  
+  .time-grid {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .time-row {
+    display: grid;
+    grid-template-columns: 100px repeat(7, 1fr);
+    min-height: 60px;
+  }
+  
+  .time-label {
+    padding: 0.5rem;
+    font-weight: 500;
+    color: #666;
+    border-right: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+  }
+  
+  .time-cell {
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .time-cell:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .time-cell.selected {
+    background-color: #e0e0ff;
+    border: 1px solid #7777e2;
+  }
