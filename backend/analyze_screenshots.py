@@ -47,7 +47,7 @@ try:
     logger.info("InternVL Model loaded successfully")
 
     # Initialize Llama via Ollama 
-    llm = OllamaLLM(model="llama2", temperature=0.3)
+    llm = OllamaLLM(model="llama3", temperature=0.3)
     
     # Define output parser
     json_parser = JsonOutputParser()
@@ -118,7 +118,7 @@ def internvl_ocr(image_path):
 # -------------------------------
 def llama_classification(ocr_result, definition):
     """
-    Uses Llama 2 (via Ollama) to classify the image description.
+    Uses Llama 3 (via Ollama) to classify the image description.
     
     :param ocr_result: The text output from InternVL.
     :param definition: A string (or JSON string) defining what constitutes procrastination.
@@ -189,7 +189,7 @@ def run_pipeline(image_path, definition):
 # -------------------------------
 if __name__ == '__main__':
     # Example usage:
-    image_path = "backend/screenshots/screenshot_2025-01-01_18-33-51.png"
+    image_path = "backend\screenshots\screenshot_2025-01-01_18-27-52.png"
     
     # Provide a JSON string (or plain text) that defines what constitutes procrastination.
     definition = '{"definition": "Procrastination includes social media, entertainment, and non-study activities."}'

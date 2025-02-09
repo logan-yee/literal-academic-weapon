@@ -56,3 +56,56 @@
 2025-02-08 18:54:27,459 - __main__ - INFO - Classification result: {'Timestamp': '2025-02-08 18:54:27', 'Content': 'This screenshot shows a YouTube video page for the animated show "Jackfruit Guy." Here’s a detailed ', 'Justification': 'Based on the definition of procrastination provided, the majority of the content in the screenshot can be classified as non-study activities. The video being watched is not related to any academic or work-related task, and the other tabs and icons open in the browser suggest that the user is engaging in entertainment and social media activities rather than productive tasks. While some of the tabs may have some practical applications, such as the Zoom and Discord extensions, the overall focus of the screenshot is on leisure and distraction rather than work or learning.', 'Verdict': True}
 2025-02-08 18:54:27,459 - __main__ - INFO - === Pipeline Complete ===
 2025-02-08 18:54:27,460 - internvl_loader - INFO - Starting model cleanup...
+2025-02-08 20:19:14,632 - internvl_loader - INFO - Using device: cpu
+2025-02-08 20:19:14,818 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-08 20:19:14,819 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:19:14,819 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-08 20:19:14,819 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-08 20:19:15,379 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-08 20:19:15,379 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:19:15,848 - internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-08 20:19:15,848 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-08 20:19:15,854 - __main__ - INFO - === Starting Pipeline ===
+2025-02-08 20:19:15,855 - __main__ - INFO - Image path: backend/screenshots/screenshot_2025-01-01_18-33-51.png
+2025-02-08 20:19:15,855 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment, and non-study activities."}
+2025-02-08 20:20:49,649 - internvl_loader - INFO - Using device: cpu
+2025-02-08 20:20:49,787 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-08 20:20:49,787 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:20:49,787 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-08 20:20:49,788 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-08 20:20:50,240 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-08 20:20:50,240 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:20:50,727 - internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-08 20:20:50,727 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-08 20:20:50,730 - __main__ - INFO - === Starting Pipeline ===
+2025-02-08 20:20:50,730 - __main__ - INFO - Image path: backend\screenshots\screenshot_2025-01-01_18-27-52.png
+2025-02-08 20:20:50,730 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment, and non-study activities."}
+2025-02-08 20:27:44,200 - __main__ - INFO - OCR result: **Left Sidebar:**
+
+- **ChatGPT**
+  - Sora
+  - Script GPT
+  - Data Analyzer
+  - Explore GPTs
+  - New ...
+2025-02-08 20:27:46,267 - __main__ - ERROR - Error in llama_classification: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull llama3`.
+2025-02-08 20:27:46,268 - __main__ - INFO - Classification result: {'Timestamp': '2025-02-08 20:27:46', 'Content': 'Error processing content', 'Justification': 'Error: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull llama3`.', 'Verdict': False}
+2025-02-08 20:27:46,268 - __main__ - INFO - === Pipeline Complete ===
+2025-02-08 20:27:46,268 - internvl_loader - INFO - Starting model cleanup...
+2025-02-08 20:29:23,779 - internvl_loader - INFO - Using device: cpu
+2025-02-08 20:29:23,942 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-08 20:29:23,943 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:29:23,943 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-08 20:29:23,943 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-08 20:29:24,497 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-08 20:29:24,498 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:29:24,997 - internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-08 20:29:24,997 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-08 20:29:25,003 - __main__ - INFO - === Starting Pipeline ===
+2025-02-08 20:29:25,004 - __main__ - INFO - Image path: backend\screenshots\screenshot_2025-01-01_18-27-52.png
+2025-02-08 20:29:25,004 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment, and non-study activities."}
+2025-02-08 20:36:23,775 - __main__ - INFO - OCR result: This screenshot displays a session of a Jupyter notebook created using ChatGPT, a model for natural ...
+2025-02-08 20:36:36,043 - __main__ - INFO - Analysis saved to analyses\analysis_20250208_203636.json
+2025-02-08 20:36:36,043 - __main__ - INFO - Classification result: {'Timestamp': '2025-02-08 20:36:36', 'Content': 'This screenshot displays a session of a Jupyter notebook created using ChatGPT, a model for natural ', 'Justification': 'The primary content of the screenshot appears to be a Jupyter notebook with code snippets and functions, indicating productive behavior. The presence of various tabs and panels on the left side of the screen does not necessarily suggest procrastination, as these could be related to the project or task being worked on. Furthermore, the code snippet `capture_and_analyze_screenshots()` suggests that the user is engaged in a specific task or analysis, which aligns with productive behavior.', 'Verdict': False}
+2025-02-08 20:36:36,045 - __main__ - INFO - === Pipeline Complete ===
+2025-02-08 20:36:36,045 - internvl_loader - INFO - Starting model cleanup...
