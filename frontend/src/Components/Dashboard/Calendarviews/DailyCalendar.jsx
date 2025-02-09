@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './DailyCalendar.css';
+import './WeeklyCalendar.css';
 
-export function DailyCalendar() {
+export function WeeklyCalendar() {
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const hours = Array.from({ length: 24 }, (_, i) => i); // 0-23 hours
-  const [selectedHour, setSelectedHour] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
   const [scheduleData, setScheduleData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,9 +14,7 @@ export function DailyCalendar() {
       try {
         const response = await fetch('http://localhost:8000/api/schedule', {
           method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-          },
+          headers: { 'Accept': 'application/json' },
         });
         
         if (!response.ok) {
@@ -24,7 +23,7 @@ export function DailyCalendar() {
         }
         
         const data = await response.json();
-        console.log('Fetched schedule data:', data); // Debug log
+        console.log('Fetched schedule data:', data);
         setScheduleData(data);
       } catch (err) {
         console.error('Error fetching schedule:', err);
@@ -40,54 +39,38 @@ export function DailyCalendar() {
   const formatHour = (hour) => {
     const period = hour >= 12 ? 'PM' : 'AM';
     const displayHour = hour % 12 || 12;
-    const formattedTime = `${displayHour}:00 ${period}`.toLowerCase();
-    console.log('Formatting hour:', hour, 'to:', formattedTime); // Debug time formatting
-    return formattedTime;
+    return `${displayHour}:00 ${period}`;
   };
 
-  const getScheduleStatus = (hour) => {
+  const getScheduleStatus = (day, hour) => {
     if (!scheduleData?.schedule) return false;
     const timeKey = formatHour(hour);
-    const status = scheduleData.schedule[timeKey];
-    console.log('Checking status for:', timeKey, 'Result:', status); // Debug schedule status
-    return status;
+    return scheduleData.schedule[day]?.[timeKey] || false;
   };
 
-  if (loading) {
-    return <div>Loading schedule...</div>;
-  }
-
-  if (error) {
-    return <div>Error loading schedule: {error}</div>;
-  }
-
-  if (!scheduleData || !scheduleData.schedule) {
-    return <div>No schedule data available</div>;
-  }
+  if (loading) return <div>Loading schedule...</div>;
+  if (error) return <div>Error loading schedule: {error}</div>;
+  if (!scheduleData || !scheduleData.schedule) return <div>No schedule data available</div>;
 
   return (
-    <div className="daily-calendar">
+    <div className="weekly-calendar">
+      <div className="day-selector">
+        {daysOfWeek.map((day, index) => (
+          <button key={day} onClick={() => setSelectedDay(index)} className={selectedDay === index ? 'active' : ''}>
+            {day}
+          </button>
+        ))}
+      </div>
       <div className="time-slots">
         {hours.map((hour) => (
-          <div
-            key={hour}
-            className={`time-slot ${selectedHour === hour ? 'selected' : ''} ${
-              getScheduleStatus(hour) ? 'scheduled' : ''
-            }`}
-            onClick={() => setSelectedHour(hour)}
-          >
+          <div key={hour} className={`time-slot ${getScheduleStatus(daysOfWeek[selectedDay], hour) ? 'scheduled' : ''}`}>
             <div className="time-label">{formatHour(hour)}</div>
             <div className="time-content">
-              {getScheduleStatus(hour) && <span className="study-indicator">Study Time</span>}
+              {getScheduleStatus(daysOfWeek[selectedDay], hour) && <span className="study-indicator">Study Time</span>}
             </div>
           </div>
         ))}
       </div>
-      {scheduleData.explanation && (
-        <div className="schedule-explanation">
-          <pre>{scheduleData.explanation}</pre>
-        </div>
-      )}
     </div>
   );
 }
