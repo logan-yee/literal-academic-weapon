@@ -51,10 +51,11 @@ export function HeroSection() {
                 </p>
                 <button 
                   className="get-started-button"
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/LoginSignup")}
                 >
                   Get started
                 </button>
+
               </div>
               <div className="content-right">
                 <img
@@ -78,7 +79,7 @@ export function HeroSection() {
               </div>
               <div className="content-right">
                 <img
-                  src="https://ih1.redbubble.net/image.4529032670.5247/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+                  src="https://wojakland.com/wp-content/grand-media/image/shocked_soyjak.png"
                   alt="About section image"
                   className="hero-image"
                 />
