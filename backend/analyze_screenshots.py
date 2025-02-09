@@ -18,7 +18,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_community.llms import Ollama as OllamaLLM
 
 # Import the InternVL model loader and cleanup helpers.
-from internvl_loader import load_internvl_model, load_image, cleanup_model
+from backend.utils.internvl_loader import load_internvl_model, load_image, cleanup_model
 
 # At the top of the file, update the logging configuration
 import logging
@@ -198,11 +198,50 @@ def run_pipeline(image_path, definition):
     return classification_result
 
 # -------------------------------
+# Get Latest Screenshot Function
+# -------------------------------
+def get_latest_screenshot():
+    """
+    Gets the path of the most recent screenshot from the screenshots folder.
+
+    Returns:
+        str: Path to the most recent screenshot, or None if no screenshots found
+    """
+    try:
+        screenshot_dir = os.path.join("backend", "screenshots")
+        if not os.path.exists(screenshot_dir):
+            logger.error(f"Screenshots directory not found: {screenshot_dir}")
+            return None
+            
+        # Get all files in the screenshots directory
+        screenshots = [
+            os.path.join(screenshot_dir, f) 
+            for f in os.listdir(screenshot_dir) 
+            if f.lower().endswith(('.png', '.jpg', '.jpeg'))
+        ]
+        
+        if not screenshots:
+            logger.error("No screenshots found in directory")
+            return None
+            
+        # Get the most recent file based on modification time
+        latest_screenshot = max(screenshots, key=os.path.getmtime)
+        logger.info(f"Found latest screenshot: {latest_screenshot}")
+        return latest_screenshot
+        
+    except Exception as e:
+        logger.error(f"Error getting latest screenshot: {e}")
+        return None
+
+# -------------------------------
 # Main Execution
 # -------------------------------
 if __name__ == '__main__':
-    # Example usage:
-    image_path = "backend\screenshots\Screenshot 2025-02-08 205059.png"
+    # Get the latest screenshot
+    image_path = get_latest_screenshot()
+    if not image_path:
+        logger.error("No valid screenshot found to analyze")
+        exit(1)
     
     # Get user's study topic (this could come from UI, command line, etc.)
     study_topic = "Poems and Literature"  # This would be user input

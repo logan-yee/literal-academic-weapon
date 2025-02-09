@@ -1,6 +1,6 @@
 from analyze_screenshots import capture_and_analyze_screenshots
-from stat_parser import run_schedule_analysis
-from schedule_creator import run_schedule_creator
+# from stat_parser import run_schedule_analysis
+# from schedule_creator import run_schedule_creator
 
 def main():
     # run_schedule_analysis()
