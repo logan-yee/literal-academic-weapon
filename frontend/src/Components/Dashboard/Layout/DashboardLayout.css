@@ -1,0 +1,11 @@
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+  }
+  
+  .dashboard-main {
+    flex: 1;
+    overflow-y: auto;
+    width: calc(100% - 200px); /* Subtracting sidebar width */
+  }

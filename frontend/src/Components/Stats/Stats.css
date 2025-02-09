@@ -2,45 +2,44 @@
     background-color: #6c6cff;
     padding: 4rem 2rem;
     color: white;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-  }
+}
   
-  .statistics-container {
+.statistics-container {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-  }
+}
   
-  .statistics-header {
+.statistics-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     margin-bottom: 4rem;
-  }
+}
   
-  .statistics-title {
+.statistics-title {
     font-size: 2.25rem;
     font-weight: 700;
-  }
+}
   
-  .statistics-underline {
+.statistics-underline {
     width: 100px;
     height: 4px;
     background: white;
     border-radius: 2px;
-  }
+}
   
-  .statistics-circles {
+.statistics-circles {
     display: flex;
     justify-content: space-around;
     margin-top: 2rem;
-  }
+}
   
-  .statistics-circle {
+.statistics-circle {
     width: 250px;
     height: 250px;
     border-radius: 50%;
@@ -48,20 +47,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
   
-  .statistics-text {
+.statistics-text {
     font-size: 3rem;
     font-weight: 700;
-  }
+}
   
-  .statistics-stats {
+.statistics-stats {
     display: flex;
     justify-content: space-around;
     margin-bottom: 6rem;
-  }
+}
   
-  .statistics-stat {
+.statistics-stat {
     display: flex;
     align-items: center;
     background: white;
@@ -69,39 +68,39 @@
     border-radius: 6px;
     padding: 1rem 2rem;
     width: 300px;
-  }
+}
   
-  .statistics-work-value,
-  .statistics-proc-value {
+.statistics-work-value,
+.statistics-proc-value {
     font-weight: bold;
     font-size: 2.5rem;
     margin-right: 1rem;
-  }
+}
   
-  .statistics-work-value {
+.statistics-work-value {
     color: lightgreen;
-  }
+}
   
-  .statistics-proc-value {
+.statistics-proc-value {
     color: red;
-  }
+}
   
-  .statistics-label {
+.statistics-label {
     font-size: 1rem;
     font-weight: 500;
-  }
+}
   
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .statistics-circles,
     .statistics-stats {
-      flex-direction: column;
-      align-items: center;
-      gap: 6rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 6rem;
     }
   
     .statistics-stat {
-      width: 100%;
+        width: 100%;
     }
-  }
+}
   
   

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { DailyCalendar } from "./Calendarviews/DailyCalendar"
 import "./Calendar.css"
 
 export function Calendar() {
@@ -21,10 +22,7 @@ export function Calendar() {
       </div>
       <div className="calendar-body">
         {view === "daily" ? (
-          <div className="daily-view">
-            {/* Placeholder for daily calendar view */}
-            <p>Daily calendar view goes here</p>
-          </div>
+          <DailyCalendar />
         ) : (
           <div className="weekly-view">
             {/* Placeholder for weekly calendar view */}
