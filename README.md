@@ -1,2 +1,2 @@
 # literal-academic-weapon
-HackHive Submission
+HackHive 2025 Submission
