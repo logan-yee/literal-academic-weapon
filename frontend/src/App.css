@@ -11,10 +11,12 @@ body {
 
 .app {
   min-height: 100vh;
+  padding-bottom: 56px; /* Height of the SubNav */
 }
 
 main {
   flex: 1;
+  margin-bottom: 56px; /* Add margin to prevent content from being hidden behind SubNav */
 }
 
 button {
