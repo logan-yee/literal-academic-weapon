@@ -5,6 +5,7 @@ import { Dashboard } from "./Components/Dashboard/Dashboard"
 import "./App.css"
 import LoginSignup from "./Components/LoginSignup/LoginSignup"
 import Stats from "./Components/Stats/Stats"
+import Profile from "./Components/Profile/Profile"
 
 function App() {
   return (
@@ -20,9 +21,11 @@ function App() {
               </main>
             }
           />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/LoginSignup" element={<LoginSignup />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>

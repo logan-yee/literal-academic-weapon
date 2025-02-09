@@ -84,9 +84,19 @@ export function SiteHeader() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="logo-text">monday</span>
+            <span className="logo-text">academic pro</span>
           </Link>
         </div>
+        {isAuthenticated && (
+          <div className="header-center">
+            <Link to="/stats" className="nav-link">
+              Stats
+            </Link>
+            <Link to="/profile" className="nav-link">
+              Profile
+            </Link>
+          </div>
+        )}
         <div className="header-right">
           <div className="auth-buttons">
             <button 

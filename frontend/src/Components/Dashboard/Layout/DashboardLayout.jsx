@@ -1,16 +1,16 @@
+import { Outlet } from 'react-router-dom'
 import { Sidebar } from "../Sidebar"
 import "./DashboardLayout.css"
 
-
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = () => {
   return (
     <div className="dashboard-layout">
       <Sidebar />
       <main className="dashboard-main">
-        {children}
+        <Outlet />
       </main>
     </div>
   )
 }
 
-export default DashboardLayout;
+export default DashboardLayout

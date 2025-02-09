@@ -16,9 +16,6 @@ export function Calendar() {
           <button className={view === "daily" ? "active" : ""} onClick={() => setView("daily")}>
             Daily
           </button>
-          <button className={view === "weekly" ? "active" : ""} onClick={() => setView("weekly")}>
-            Weekly
-          </button>
         </div>
       </div>
       <div className="calendar-body">

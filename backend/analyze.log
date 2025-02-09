@@ -19,3 +19,144 @@
 2025-02-09 01:34:57,204 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
 2025-02-09 01:34:57,436 - utils.internvl_loader - ERROR - Error loading InternVL model: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
 2025-02-09 01:34:57,437 - analyze_screenshots - ERROR - Error loading models: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
+2025-02-09 06:14:24,538 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 06:14:24,660 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 06:14:24,660 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:14:24,661 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 06:14:24,661 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 06:14:25,253 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 06:14:25,253 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:14:25,844 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 06:14:25,845 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 06:14:25,989 - main - INFO - Received study topic: 
+2025-02-09 06:14:26,103 - analyze_screenshots - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_06-14-25.png
+2025-02-09 06:14:26,105 - analyze_screenshots - INFO - === Starting Pipeline ===
+2025-02-09 06:14:26,105 - analyze_screenshots - INFO - Image path: backend/screenshots/screenshot_2025-02-09_06-14-25.png
+2025-02-09 06:14:26,105 - analyze_screenshots - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to . Productive behavior includes activities related to studying/working on .Do not include any other activities in your definition."}
+2025-02-09 06:15:50,455 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 06:15:50,571 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 06:15:50,572 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:15:50,572 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 06:15:50,572 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 06:15:50,906 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 06:15:50,906 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:15:51,484 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 06:15:51,484 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 06:15:51,672 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:15:51,672 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:15:51,675 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:15:51,676 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:16:12,222 - main - INFO - Received study topic: Literature and Poems
+2025-02-09 06:16:12,502 - analyze_screenshots - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_06-16-12.png
+2025-02-09 06:16:12,503 - analyze_screenshots - INFO - === Starting Pipeline ===
+2025-02-09 06:16:12,505 - analyze_screenshots - INFO - Image path: backend/screenshots/screenshot_2025-02-09_06-16-12.png
+2025-02-09 06:16:12,506 - analyze_screenshots - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Literature and Poems. Productive behavior includes activities related to studying/working on Literature and Poems.Do not include any other activities in your definition."}
+2025-02-09 06:22:33,163 - analyze_screenshots - INFO - OCR result: This screenshot is from the "Hackhive" application, specifically the "Monday" dashboard for "Literat...
+2025-02-09 06:22:46,207 - analyze_screenshots - INFO - Analysis saved to analyses\analysis_20250209_062246.json
+2025-02-09 06:22:46,207 - analyze_screenshots - INFO - Classification result: [{'Timestamp': '2025-02-09 06:22:46', 'Content': 'This screenshot is from the "Hackhive" application, specifically the "Monday" dashboard for "Literat', 'Justification': "The screenshot shows multiple browser tabs open, including ones with titles like 'is mista a part of ollama' and 'Share You Said: show me', which are unrelated to Literature and Poems. Additionally, the taskbar shows icons for social media apps like Instagram, indicating that the user is likely engaged in non-productive activities.", 'Verdict': True}]
+2025-02-09 06:22:46,207 - analyze_screenshots - INFO - Procrastination detected - triggering notifications
+2025-02-09 06:22:46,327 - comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'c:\\Users\\logan\\Documents\\literal-academic-weapon\\.venv\\Lib\\site-packages\\comtypes\\gen\\__init__.py'>
+2025-02-09 06:22:46,327 - comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'c:\Users\logan\Documents\literal-academic-weapon\.venv\Lib\site-packages\comtypes\gen'
+2025-02-09 06:22:55,134 - analyze_screenshots - INFO - === Pipeline Complete ===
+2025-02-09 06:28:38,951 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 06:28:39,115 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 06:28:39,115 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:28:39,115 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 06:28:39,115 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 06:28:39,539 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 06:28:39,540 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:28:40,125 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 06:28:40,125 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 06:28:43,055 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:28:43,063 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:28:43,064 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:28:43,066 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:32:00,008 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 06:32:00,167 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 06:32:00,167 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:32:00,168 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 06:32:00,168 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 06:32:00,496 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 06:32:00,497 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:32:01,053 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 06:32:01,053 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 06:32:01,063 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:32:01,063 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:32:01,066 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:32:01,066 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:32:16,294 - main - INFO - Received study topic: Data Structures and Algorithms
+2025-02-09 06:32:16,595 - analyze_screenshots - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_06-32-16.png
+2025-02-09 06:32:16,595 - analyze_screenshots - INFO - === Starting Pipeline ===
+2025-02-09 06:32:16,596 - analyze_screenshots - INFO - Image path: backend/screenshots/screenshot_2025-02-09_06-32-16.png
+2025-02-09 06:32:16,596 - analyze_screenshots - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Data Structures and Algorithms. Productive behavior includes activities related to studying/working on Data Structures and Algorithms.Do not include any other activities in your definition."}
+2025-02-09 06:36:00,273 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 06:36:00,528 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 06:36:00,529 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:36:00,529 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 06:36:00,529 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 06:36:00,845 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 06:36:00,845 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 06:36:01,433 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 06:36:01,434 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 06:36:18,429 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:36:18,429 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:36:18,432 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 06:36:18,433 - main - INFO - Successfully loaded schedule data
+2025-02-09 06:36:47,071 - main - INFO - Received study topic: Literature
+2025-02-09 06:36:47,171 - analyze_screenshots - INFO - New screenshot captured: backend/screenshots/screenshot_2025-02-09_06-36-47.png
+2025-02-09 06:36:47,171 - analyze_screenshots - INFO - === Starting Pipeline ===
+2025-02-09 06:36:47,171 - analyze_screenshots - INFO - Image path: backend/screenshots/screenshot_2025-02-09_06-36-47.png
+2025-02-09 06:36:47,172 - analyze_screenshots - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Literature. Productive behavior includes activities related to studying/working on Literature.Do not include any other activities in your definition."}
+2025-02-09 07:03:15,311 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 07:03:15,422 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 07:03:15,422 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:03:15,423 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 07:03:15,423 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 07:03:15,743 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 07:03:15,744 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:03:16,291 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 07:03:16,291 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 07:03:44,119 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 07:03:44,119 - main - INFO - Successfully loaded schedule data
+2025-02-09 07:03:44,121 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 07:03:44,121 - main - INFO - Successfully loaded schedule data
+2025-02-09 07:06:05,576 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 07:06:05,699 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 07:06:05,699 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:06:05,699 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 07:06:05,700 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 07:06:06,057 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 07:06:06,058 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:06:06,610 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 07:06:06,610 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 07:06:57,438 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 07:06:57,551 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 07:06:57,551 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:06:57,551 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 07:06:57,552 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 07:06:57,889 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 07:06:57,890 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:06:58,512 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 07:06:58,512 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 07:07:05,250 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 07:07:05,251 - main - INFO - Successfully loaded schedule data
+2025-02-09 07:07:05,257 - main - INFO - Attempting to read schedule from: C:\Users\logan\Documents\literal-academic-weapon\backend\backend_schedules\study_schedule_1739093364.js
+2025-02-09 07:07:05,258 - main - INFO - Successfully loaded schedule data
+2025-02-09 07:13:21,055 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 07:13:21,238 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 07:13:21,239 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:13:21,239 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 07:13:21,239 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 07:13:21,570 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 07:13:21,570 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:13:22,130 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 07:13:22,131 - analyze_screenshots - INFO - InternVL Model loaded successfully
+2025-02-09 07:18:07,250 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 07:18:07,402 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 07:18:07,404 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:18:07,404 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 07:18:07,404 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 07:18:07,765 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-09 07:18:07,765 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-09 07:18:08,350 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-09 07:18:08,351 - analyze_screenshots - INFO - InternVL Model loaded successfully

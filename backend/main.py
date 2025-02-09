@@ -5,6 +5,15 @@ from implement_study_plan import run_schedule_creator
 import json
 import os
 import logging
+from pydantic import BaseModel
+from analyze_screenshots import create_definition, run_pipeline, get_latest_screenshot, cleanup_model, internvl_model
+
+# Add a global variable to track analysis state
+is_analysis_running = False
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
@@ -12,8 +21,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173",    # Vite default
-        "http://localhost:3000",    # Common React port
+        "http://localhost:3000",    # React port
         "http://127.0.0.1:5173",
         "http://127.0.0.1:3000",
     ],
@@ -22,7 +30,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-logger = logging.getLogger(__name__)
+class StudyTopic(BaseModel):
+    text: str
 
 @app.get("/")
 def home():
@@ -30,8 +39,15 @@ def home():
 
 @app.get("/api/courses")
 def fetch_courses():
-    courses = get_courses()
-    return {"courses": courses}
+    try:
+        courses = get_courses()
+        print("Fetched courses:", courses)  # Debug print
+        if courses is None:
+            raise HTTPException(status_code=404, detail="No courses found")
+        return courses  # Return the courses directly since get_courses() already returns JSON
+    except Exception as e:
+        print("Error in fetch_courses:", str(e))  # Debug print
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/announcements")
 def fetch_announcements():
@@ -80,6 +96,60 @@ async def get_schedule():
 def choose_course(course_id: str):
     result = select_course(course_id)
     return {"selected_course": result}
+
+@app.post("/api/submit")
+async def submit_topic(topic: StudyTopic):
+    global is_analysis_running
+    try:
+        if is_analysis_running:
+            raise HTTPException(status_code=400, detail="Analysis already in progress")
+            
+        is_analysis_running = True
+        logger.info(f"Received study topic: {topic.text}")
+        
+        # Create definition using the submitted topic
+        definition = create_definition(topic.text)
+        
+        # Get new screenshot and analyze it
+        image_path = get_latest_screenshot()
+        if image_path:
+            # Run the pipeline with the new topic
+            analysis_result = run_pipeline(image_path, definition)
+            return {
+                "status": "success",
+                "message": "Analysis completed",
+                "result": analysis_result
+            }
+        else:
+            raise HTTPException(status_code=500, detail="Failed to capture screenshot")
+            
+    except Exception as e:
+        logger.error(f"Error processing study topic: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        is_analysis_running = False
+
+@app.post("/api/cancel")
+async def cancel_analysis():
+    global is_analysis_running
+    try:
+        if not is_analysis_running:
+            return {"status": "success", "message": "No analysis running"}
+            
+        # Set the flag to false to stop the analysis
+        is_analysis_running = False
+        
+        # Cleanup resources
+        cleanup_model(internvl_model)
+        logger.info("Analysis canceled and resources cleaned up")
+        
+        return {
+            "status": "success",
+            "message": "Analysis canceled successfully"
+        }
+    except Exception as e:
+        logger.error(f"Error canceling analysis: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn

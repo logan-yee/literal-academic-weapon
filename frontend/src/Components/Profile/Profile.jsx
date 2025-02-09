@@ -5,33 +5,47 @@ import './Profile.css';
 const Profile = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    // Check if user is logged in
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-    } else {
-      setUsername("Naufil");
-    }
-  }, [navigate]);
+    const fetchData = async () => {
+      try {
+        console.log('Fetching courses...');
+        const response = await fetch('http://127.0.0.1:5000/api/courses');
+        
+        if (!response.ok) {
+          console.error('Response not OK:', response.status);
+          throw new Error(`Failed to fetch courses: ${response.status}`);
+        }
 
-  // This would be imported from your JSON file
-  const courses = [
-    {
-      id: 1,
-      code: "CS101",
-      name: "Introduction to Computer Science",
-      semester: "Fall 2024"
-    },
-    {
-      id: 2,
-      code: "MATH201",
-      name: "Calculus II",
-      semester: "Fall 2024"
-    },
-    // Add more courses as needed
-  ];
+        const data = await response.json();
+        console.log('Raw API response:', data);  // Debug log
+        
+        if (!data) {
+          throw new Error('No data received from API');
+        }
+
+        // Handle the data structure from your Canvas API
+        const formattedCourses = data.map(course => ({
+          id: course.id,
+          code: course.course_code || course.name,
+          name: course.name,
+          term: course.enrollment_term_id
+        }));
+        
+        console.log('Formatted courses:', formattedCourses);
+        setCourses(formattedCourses);
+        setUsername("Naufil");
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
 
   return (
     <div className="profile-container">
@@ -43,13 +57,17 @@ const Profile = () => {
         <section className="courses-section">
           <h2>My Courses</h2>
           <div className="courses-grid">
-            {courses.map(course => (
-              <div key={course.id} className="course-card">
-                <h3>{course.code}</h3>
-                <h4>{course.name}</h4>
-                <p>{course.semester}</p>
-              </div>
-            ))}
+            {Array.isArray(courses) && courses.length > 0 ? (
+              courses.map(course => (
+                <div key={course.id} className="course-card">
+                  <h3>{course.code}</h3>
+                  <h4>{course.name}</h4>
+                  <p>Term: {course.term}</p>
+                </div>
+              ))
+            ) : (
+              <p>No courses found. {loading ? 'Loading...' : ''}</p>
+            )}
           </div>
         </section>
       </div>

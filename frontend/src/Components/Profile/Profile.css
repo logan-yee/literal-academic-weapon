@@ -1,7 +1,48 @@
 .profile-container {
-  padding: 6rem;
+  padding-top: 80px; 
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.profile-header {
+  margin-bottom: 2rem;
 }
 
 .profile-content {
-  margin-top: 4rem;
+  width: 100%;
+}
+
+.courses-section {
+  margin-top: 2rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.course-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-card h3 {
+  margin: 0;
+  color: #333;
+}
+
+.course-card h4 {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.course-card p {
+  margin: 0;
+  color: #888;
 } 

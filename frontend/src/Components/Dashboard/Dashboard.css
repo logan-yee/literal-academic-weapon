@@ -1,3 +1,15 @@
+.dashboard-content {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.content-wrapper {
+  padding: 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .dashboard {
   height: 100%;
 }
@@ -36,6 +48,20 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   flex-grow: 1;
+}
+
+.cancel-btn.active {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn.active:hover {
+  background-color: #ff3333;
 }
   
   
