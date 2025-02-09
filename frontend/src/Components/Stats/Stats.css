@@ -3,8 +3,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 10px;
-    background: white;
+    background: #6c6cff;
     padding-bottom: 30px;
 
 }
@@ -38,7 +37,7 @@
 
 .circle {
 
-    color: #e62429;
+    color: white;
     width: 250px;
     height: 250px;
     margin-left: 200px;
@@ -47,7 +46,7 @@
 
 .text {
 
-    color: #e62429;
+    color: white;
     font-size: 48px;
     font-weight: 700;
     margin: auto;
@@ -58,7 +57,7 @@
 
     width: 400px;
     height: 6px;
-    background: #e62429;
+    background: white;
     border-radius: 9px;
 
 }
@@ -79,16 +78,25 @@
     margin: auto;
     width: 480px;
     height: 80px;
-    background: #eaeaea;
+    background: white;
+    color: #6c6cff;
     border-radius: 6px;
 
 }
 
-.value {
+.work-value {
 
-    color: #e62429;
+    color: lightgreen;
     font-weight: bold;
-    /* align-items: center; */
+    margin-left: 10px;
+    font-size: 48px;
+
+}
+
+.proc-value {
+
+    color: red;
+    font-weight: bold;
     margin-left: 10px;
     font-size: 48px;
 
