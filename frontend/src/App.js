@@ -1,23 +1,30 @@
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { SiteHeader } from "./Components/SiteHeader/SiteHeader"
-import { SubNav } from "./Components/SubNav/SubNav"
 import { HeroSection } from "./Components/HeroSection/HeroSection"
+import { Dashboard } from "./Components/Dashboard/Dashboard"
 import "./App.css"
-// import LoginSignup from "./Components/LoginSignup/LoginSignup"
-// import Stats from "./Components/Stats/Stats"
+
 
 function App() {
   return (
     <Router>
       <div className="app">
         <SiteHeader />
-        <SubNav />
-        <main>
-          <HeroSection />
-        </main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <main>
+                <HeroSection />
+              </main>
+            }
+          />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
       </div>
     </Router>
   )
 }
 
 export default App
+

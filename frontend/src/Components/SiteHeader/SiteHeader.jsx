@@ -1,9 +1,29 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import "./SiteHeader.css"
 
 export function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled)
+      }
+    }
+
+    document.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => {
+      document.removeEventListener("scroll", handleScroll)
+    }
+  }, [scrolled])
+
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
       <div className="header-container">
         <div className="header-left">
           <Link to="/" className="logo-link">
@@ -33,26 +53,11 @@ export function SiteHeader() {
             </svg>
             <span className="logo-text">monday</span>
           </Link>
-          <nav className="main-nav">
-            <div className="nav-item">
-              Products
-              <span className="chevron-down">▼</span>
-            </div>
-            <div className="nav-item">
-              Solutions
-              <span className="chevron-down">▼</span>
-            </div>
-            <div className="nav-item">
-              Resources
-              <span className="chevron-down">▼</span>
-            </div>
-          </nav>
         </div>
         <div className="header-right">
           <Link to="/login" className="login-link">
             Log in
           </Link>
-          <button className="button button-outline">Contact sales</button>
           <button className="button button-primary">Go to my account</button>
           <button className="menu-button">
             <span className="menu-icon">☰</span>
