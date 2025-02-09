@@ -38,6 +38,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+def create_definition(study_topic: str) -> str:
+    """
+    Creates a definition string combining the base procrastination definition
+    with the user's specific study topic.
+    
+    Args:
+        study_topic: The topic the user should be studying/working on
+    """
+    base_definition = "Procrastination includes social media, entertainment, "
+    return (f'{{"definition": "{base_definition} and any activities unrelated to {study_topic}. '
+            f'Productive behavior includes activities related to studying/working on {study_topic}"}}')
+
 # -------------------------------
 # Global Model Loading
 # -------------------------------
@@ -132,13 +144,14 @@ def llama_classification(ocr_result, definition):
         })
         
         # Format the result in the desired structure
-        formatted_result = {
+        formatted_result = [{
+    
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Content": ocr_result[:100],  # First 100 chars of content
             "Justification": result.get("reasoning", "No reasoning provided"),
             "Verdict": result.get("label") == "procrastination"
-        }
-        
+        }]
+
         # Create analyses directory if it doesn't exist
         os.makedirs("analyses", exist_ok=True)
         
@@ -155,12 +168,12 @@ def llama_classification(ocr_result, definition):
 
     except Exception as e:
         logger.error(f"Error in llama_classification: {e}")
-        return {
+        return [{
             "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "Content": "Error processing content",
             "Justification": f"Error: {str(e)}",
             "Verdict": False
-        }
+        }]
 
 # -------------------------------
 # Pipeline Runner Function
@@ -189,14 +202,19 @@ def run_pipeline(image_path, definition):
 # -------------------------------
 if __name__ == '__main__':
     # Example usage:
-    image_path = "backend\screenshots\screenshot_2025-01-01_18-27-52.png"
+    image_path = "backend\screenshots\Screenshot 2025-02-08 205059.png"
     
-    # Provide a JSON string (or plain text) that defines what constitutes procrastination.
-    definition = '{"definition": "Procrastination includes social media, entertainment, and non-study activities."}'
+    # Get user's study topic (this could come from UI, command line, etc.)
+    study_topic = "Poems and Literature"  # This would be user input
     
-    # Run the pipeline synchronously.
+    # Create the full definition
+    definition = create_definition(study_topic)
+    
+    # Run the pipeline synchronously
     final_output = run_pipeline(image_path, definition)
     print("Final Output:", final_output)
     
-    # Cleanup resources.
+    # Cleanup resources
     cleanup_model(internvl_model)
+
+

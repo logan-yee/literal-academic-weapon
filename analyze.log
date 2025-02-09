@@ -109,3 +109,20 @@
 2025-02-08 20:36:36,043 - __main__ - INFO - Classification result: {'Timestamp': '2025-02-08 20:36:36', 'Content': 'This screenshot displays a session of a Jupyter notebook created using ChatGPT, a model for natural ', 'Justification': 'The primary content of the screenshot appears to be a Jupyter notebook with code snippets and functions, indicating productive behavior. The presence of various tabs and panels on the left side of the screen does not necessarily suggest procrastination, as these could be related to the project or task being worked on. Furthermore, the code snippet `capture_and_analyze_screenshots()` suggests that the user is engaged in a specific task or analysis, which aligns with productive behavior.', 'Verdict': False}
 2025-02-08 20:36:36,045 - __main__ - INFO - === Pipeline Complete ===
 2025-02-08 20:36:36,045 - internvl_loader - INFO - Starting model cleanup...
+2025-02-08 20:54:55,025 - internvl_loader - INFO - Using device: cpu
+2025-02-08 20:54:55,155 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-08 20:54:55,155 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:54:55,156 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-08 20:54:55,156 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-08 20:54:55,631 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-08 20:54:55,631 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-08 20:54:56,101 - internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-08 20:54:56,101 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-08 20:54:56,107 - __main__ - INFO - === Starting Pipeline ===
+2025-02-08 20:54:56,107 - __main__ - INFO - Image path: backend\screenshots\Screenshot 2025-02-08 205059.png
+2025-02-08 20:54:56,107 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Poems and Literature. Productive behavior includes activities related to studying/working on Poems and Literature"}
+2025-02-08 21:01:20,080 - __main__ - INFO - OCR result: The screenshot shows a Google Books search result for "The Raven" by Edgar Allan Poe. Here's a detai...
+2025-02-08 21:01:31,333 - __main__ - INFO - Analysis saved to analyses\analysis_20250208_210131.json
+2025-02-08 21:01:31,333 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-08 21:01:31', 'Content': 'The screenshot shows a Google Books search result for "The Raven" by Edgar Allan Poe. Here\'s a detai', 'Justification': "The primary content of the screenshot appears to be related to studying/working on literature, specifically Edgar Allan Poe's work. The text describes the publication history, career, and death of Poe, as well as quotes and context from his poem 'The Raven'. This suggests that the user is engaging in productive behavior by reading and learning about poetry and literature.", 'Verdict': False}]
+2025-02-08 21:01:31,334 - __main__ - INFO - === Pipeline Complete ===
+2025-02-08 21:01:31,334 - internvl_loader - INFO - Starting model cleanup...
