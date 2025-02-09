@@ -12,3 +12,4 @@ langchain-ollama
 plyer
 accelerate
 flash-attn
+pyttsx3

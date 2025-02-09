@@ -6,6 +6,7 @@ from datetime import datetime
 import os
 import time
 from screenshot_taker import capture_screenshot
+from voice_notification import engine
 
 # Filter out specific warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -194,6 +195,11 @@ def run_pipeline(image_path, definition):
     # Step 2: Classify the extracted text
     classification_result = llama_classification(ocr_result, definition)
     logger.info(f"Classification result: {classification_result}")
+
+    # Check if procrastination was detected
+    if classification_result[0]["Verdict"]:
+        logger.info("Procrastination detected - triggering voice notification")
+        
 
     logger.info("=== Pipeline Complete ===")
     return classification_result
