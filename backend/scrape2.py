@@ -1,13 +1,12 @@
 import sys
 import json
 import requests
-import torch
 
 print("Python Executable:", sys.executable)
 
 # Canvas API URL and token
 API_URL = "https://learn.ontariotechu.ca/api/v1"
-API_TOKEN = "" #Insert API token !!!!!!!!!!!!!!!!!!!!!!!
+API_TOKEN = "13377~u2MxkTCccXQvRLNAD4UBhLQP7PNMrxNknWY9rym267YhnDvN6hxGZYJHnz4PDtPf" # Insert API token
 
 headers = {
     "Authorization": f"Bearer {API_TOKEN}",
@@ -105,11 +104,6 @@ def get_assignments(course_id):
         print(f"Failed to fetch assignments (HTTP {response.status_code})")
         print("Response Content:", response.text)
         return None
-
-def clear_gpu_memory():
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-        torch.cuda.synchronize()
 
 # Main workflow
 if __name__ == "__main__":

@@ -61,12 +61,13 @@ def create_study_schedule(analyses):
     Data collected from user's screen activity:
     {analysis_data}
 
-    Return output in Json format and remove all comments and remove all backslashes:
+    Return output in Json format and nothing else and remove all comments including backslashes.:
 
     {{
         "schedule": {{
-            "05:00 am": true or false,
-            "09:00 pm": true or false
+            "01:00 am": true or false,
+            ...
+            "11:00 pm": true or false
         }},
         "explanation": "Detailed explanation on how the schedule optimizes productivity."
     }}
