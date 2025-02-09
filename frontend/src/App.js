@@ -1,7 +1,8 @@
 import { BrowserRouter as Router } from "react-router-dom"
 import { HeroSection } from "./Components/HeroSection/HeroSection"
 import "./App.css"
-import LoginSignup from "./Components/LoginSignup/LoginSignup"
+// import LoginSignup from "./Components/LoginSignup/LoginSignup"
+// import Stats from "./Components/Stats/Stats"
 
 function App() {
   return (

@@ -27,14 +27,14 @@ const Stats = () => {
                 <div className="stat">
                     
                     <span className="subsection">Hours Working: </span>
-                    <span className="value"> {work}</span>
+                    <span className="work-value"> {work}</span>
                     
                 </div>
 
                 <div className="stat">
                     
                     <span className="subsection">Hours Procrastinating: </span> 
-                    <span className="value"> {proc}</span>
+                    <span className="proc-value"> {proc}</span>
 
                 </div>
 
@@ -48,8 +48,8 @@ const Stats = () => {
                     
                     styles={buildStyles({
 
-                        pathColor: '#e62429',
-                        textColor: '#e62429'
+                        pathColor: 'lightgreen',
+                        textColor: 'lightgreen'
 
                     })}
                 
@@ -61,8 +61,8 @@ const Stats = () => {
                     
                     styles={buildStyles({
 
-                        pathColor: '#e62429',
-                        textColor: '#e62429'
+                        pathColor: 'red',
+                        textColor: 'red'
 
                     })}
 
