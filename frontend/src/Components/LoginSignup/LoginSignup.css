@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    margin-top: 200px;
-    background: white;
+    background-color: #6c6cff;
+    color: white;
     padding-bottom: 30px;
 
 }
@@ -13,16 +13,15 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 9px;
     width: 100%;
-    margin-top: 30px;
+    margin-top: 50px;
 
 }
 
 .text {
 
-    color: red;
+    color: #6c6cff;
     font-size: 48px;
     font-weight: 700;
 
@@ -30,31 +29,39 @@
 
 .underline {
 
-    width: 61px;
+    width: 175px;
     height: 6px;
-    background: red;
-    border-radius: 9px;
+    background: white;
+    border-radius: 6px;
 
 }
 
-.inputs {
+.ui-form {
 
     margin-top: 55px;
     display: flex;
+    color: white;
     flex-direction: column;
     gap: 25px;
 
 }
 
-.input {
+.field {
 
     display: flex;
     align-items: center;
     margin: auto;
     width: 480px;
     height: 80px;
+    color: #6c6cff;
     background: #eaeaea;
     border-radius: 6px;
+
+}
+
+.form {
+
+    margin-left: 20px;
 
 }
 
@@ -73,8 +80,8 @@
     align-items: center;
     width: 220px;
     height: 59px;
-    color: white;
-    background: red;
+    color: #6c6cff;
+    background: white;
     border: 50px;
     font-size: 19px;
     font-weight: 700;
