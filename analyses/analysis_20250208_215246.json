@@ -1,0 +1,8 @@
+[
+    {
+        "Timestamp": "2025-02-08 21:52:46",
+        "Content": "The screenshot shows a web browser with an open YouTube video page. The video is titled \"How to Crea",
+        "Justification": "The primary content of the screenshot appears to be related to programming, specifically a tutorial on creating a Flask + React project. The presence of code snippets and technical terms like 'Flask', 'React', and 'Vite' suggests that the user is engaged in productive behavior related to studying or working on programming. There is no indication of social media, entertainment, or any other activities unrelated to programming.",
+        "Verdict": false
+    }
+]

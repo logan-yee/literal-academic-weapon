@@ -1,10 +1,11 @@
 import warnings
 import logging
 import json
-from PIL import Image
 import torch
 from datetime import datetime
 import os
+import time
+from screenshot_taker import capture_screenshot
 
 # Filter out specific warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -18,7 +19,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_community.llms import Ollama as OllamaLLM
 
 # Import the InternVL model loader and cleanup helpers.
-from backend.utils.internvl_loader import load_internvl_model, load_image, cleanup_model
+from utils.internvl_loader import load_internvl_model, load_image, cleanup_model
 
 # At the top of the file, update the logging configuration
 import logging
@@ -202,58 +203,55 @@ def run_pipeline(image_path, definition):
 # -------------------------------
 def get_latest_screenshot():
     """
-    Gets the path of the most recent screenshot from the screenshots folder.
-
+    Captures a new screenshot and gets its path.
     Returns:
-        str: Path to the most recent screenshot, or None if no screenshots found
+        str: Path to the captured screenshot, or None if failed
     """
     try:
-        screenshot_dir = os.path.join("backend", "screenshots")
-        if not os.path.exists(screenshot_dir):
-            logger.error(f"Screenshots directory not found: {screenshot_dir}")
-            return None
-            
-        # Get all files in the screenshots directory
-        screenshots = [
-            os.path.join(screenshot_dir, f) 
-            for f in os.listdir(screenshot_dir) 
-            if f.lower().endswith(('.png', '.jpg', '.jpeg'))
-        ]
+        # Capture new screenshot
+        screenshot_path = capture_screenshot()
+        logger.info(f"New screenshot captured: {screenshot_path}")
         
-        if not screenshots:
-            logger.error("No screenshots found in directory")
+        if not os.path.exists(screenshot_path):
+            logger.error(f"Screenshot was not created: {screenshot_path}")
             return None
             
-        # Get the most recent file based on modification time
-        latest_screenshot = max(screenshots, key=os.path.getmtime)
-        logger.info(f"Found latest screenshot: {latest_screenshot}")
-        return latest_screenshot
+        return screenshot_path
         
     except Exception as e:
-        logger.error(f"Error getting latest screenshot: {e}")
+        logger.error(f"Error capturing/getting screenshot: {e}")
         return None
 
 # -------------------------------
 # Main Execution
 # -------------------------------
 if __name__ == '__main__':
-    # Get the latest screenshot
-    image_path = get_latest_screenshot()
-    if not image_path:
-        logger.error("No valid screenshot found to analyze")
-        exit(1)
-    
-    # Get user's study topic (this could come from UI, command line, etc.)
-    study_topic = "Poems and Literature"  # This would be user input
+    # Get user input for study topic (only once at start)
+    study_topic = "Programming"
     
     # Create the full definition
     definition = create_definition(study_topic)
     
-    # Run the pipeline synchronously
-    final_output = run_pipeline(image_path, definition)
-    print("Final Output:", final_output)
-    
-    # Cleanup resources
-    cleanup_model(internvl_model)
+    try:
+        while True:
+            # Get new screenshot and analyze it
+            image_path = get_latest_screenshot()
+            if image_path:
+                # Run the pipeline synchronously
+                final_output = run_pipeline(image_path, definition)
+                print("Final Output:", final_output)
+            
+            # Wait for 10 minutes before next capture
+            logger.info("Waiting 1 minute before next screenshot...")
+            time.sleep(60)  # 60 seconds = 1 minute
+            
+    except KeyboardInterrupt:
+        logger.info("Screenshot analysis stopped by user")
+        # Cleanup resources
+        cleanup_model(internvl_model)
+    except Exception as e:
+        logger.error(f"Error in main loop: {e}")
+        # Cleanup resources
+        cleanup_model(internvl_model)
 
 

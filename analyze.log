@@ -126,3 +126,43 @@
 2025-02-08 21:01:31,333 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-08 21:01:31', 'Content': 'The screenshot shows a Google Books search result for "The Raven" by Edgar Allan Poe. Here\'s a detai', 'Justification': "The primary content of the screenshot appears to be related to studying/working on literature, specifically Edgar Allan Poe's work. The text describes the publication history, career, and death of Poe, as well as quotes and context from his poem 'The Raven'. This suggests that the user is engaging in productive behavior by reading and learning about poetry and literature.", 'Verdict': False}]
 2025-02-08 21:01:31,334 - __main__ - INFO - === Pipeline Complete ===
 2025-02-08 21:01:31,334 - internvl_loader - INFO - Starting model cleanup...
+2025-02-08 21:35:49,427 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-08 21:35:49,586 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-08 21:35:49,587 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-08 21:35:49,587 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-08 21:35:49,587 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-08 21:35:50,220 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-08 21:35:50,220 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-08 21:35:50,701 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-08 21:35:50,701 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-08 21:35:50,842 - __main__ - INFO - New screenshot captured: screenshots/screenshot_2025-02-08_21-35-50.png
+2025-02-08 21:35:50,842 - __main__ - INFO - === Starting Pipeline ===
+2025-02-08 21:35:50,842 - __main__ - INFO - Image path: screenshots/screenshot_2025-02-08_21-35-50.png
+2025-02-08 21:35:50,843 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Programming. Productive behavior includes activities related to studying/working on Programming"}
+2025-02-08 21:42:28,404 - __main__ - INFO - OCR result: The screenshot shows a code editor with a Python project open, currently focused on a file named `an...
+2025-02-08 21:42:39,956 - __main__ - INFO - Analysis saved to analyses\analysis_20250208_214239.json
+2025-02-08 21:42:39,956 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-08 21:42:39', 'Content': 'The screenshot shows a code editor with a Python project open, currently focused on a file named `an', 'Justification': 'The primary content of the screenshot shows a code editor with a Python project open, indicating that the person is actively working on programming-related tasks. The code snippets and import statements suggest that they are focused on writing and debugging code, which aligns with productive behavior according to the definition provided.', 'Verdict': False}]
+2025-02-08 21:42:39,956 - __main__ - INFO - === Pipeline Complete ===
+2025-02-08 21:42:39,956 - __main__ - INFO - Waiting 10 minutes before next screenshot...
+2025-02-08 21:44:10,276 - __main__ - INFO - Screenshot analysis stopped by user
+2025-02-08 21:44:10,277 - utils.internvl_loader - INFO - Starting model cleanup...
+2025-02-08 21:45:31,251 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-08 21:45:31,581 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-08 21:45:31,582 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-08 21:45:31,582 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-08 21:45:31,582 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-08 21:45:41,207 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - num_image_token: 256
+2025-02-08 21:45:41,207 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.modeling_internvl_chat - INFO - ps_version: v2
+2025-02-08 21:45:42,202 - utils.internvl_loader - INFO - Successfully loaded InternVL model and tokenizer
+2025-02-08 21:45:42,203 - __main__ - INFO - InternVL Model loaded successfully
+2025-02-08 21:45:42,758 - __main__ - INFO - New screenshot captured: screenshots/screenshot_2025-02-08_21-45-42.png
+2025-02-08 21:45:42,759 - __main__ - INFO - === Starting Pipeline ===
+2025-02-08 21:45:42,759 - __main__ - INFO - Image path: screenshots/screenshot_2025-02-08_21-45-42.png
+2025-02-08 21:45:42,760 - __main__ - INFO - Definition: {"definition": "Procrastination includes social media, entertainment,  and any activities unrelated to Programming. Productive behavior includes activities related to studying/working on Programming"}
+2025-02-08 21:52:35,747 - __main__ - INFO - OCR result: The screenshot shows a web browser with an open YouTube video page. The video is titled "How to Crea...
+2025-02-08 21:52:46,659 - __main__ - INFO - Analysis saved to analyses\analysis_20250208_215246.json
+2025-02-08 21:52:46,660 - __main__ - INFO - Classification result: [{'Timestamp': '2025-02-08 21:52:46', 'Content': 'The screenshot shows a web browser with an open YouTube video page. The video is titled "How to Crea', 'Justification': "The primary content of the screenshot appears to be related to programming, specifically a tutorial on creating a Flask + React project. The presence of code snippets and technical terms like 'Flask', 'React', and 'Vite' suggests that the user is engaged in productive behavior related to studying or working on programming. There is no indication of social media, entertainment, or any other activities unrelated to programming.", 'Verdict': False}]
+2025-02-08 21:52:46,660 - __main__ - INFO - === Pipeline Complete ===
+2025-02-08 21:52:46,660 - __main__ - INFO - Waiting 10 minutes before next screenshot...
+2025-02-08 21:52:50,076 - __main__ - INFO - Screenshot analysis stopped by user
+2025-02-08 21:52:50,076 - utils.internvl_loader - INFO - Starting model cleanup...
