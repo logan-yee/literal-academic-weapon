@@ -51,12 +51,14 @@ def create_study_schedule(analyses):
     print("Analysis data: ", analysis_data)  # Debugging print
 
     hours = "5"  # This could be dynamic from frontend
+    hoursofstudy = "user dependent"  # This could be dynamic from frontend
     prompt = f"""
     You are a productivity coach analyzing the user's screen activity patterns to create an optimized study schedule.
     
     1. Identify productive and procrastination hours using the "Verdict" field.
-    2. Allocate focused study time in 30-minute intervals during productive hours.
+    2. Allocate focused study time in 1-hour intervals during productive hours.
     3. Ensure total study time is at least {hours} hours.
+    4. If the total study time is less than {hours} hours, suggest additional study hours during procrastination hours.
 
     Data collected from user's screen activity:
     {analysis_data}
