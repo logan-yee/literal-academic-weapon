@@ -6,7 +6,9 @@ from datetime import datetime
 import os
 import time
 from screenshot_taker import capture_screenshot
-from voice_notification import engine
+
+# Import the voice notification module
+from voice_notification import speak
 
 # Filter out specific warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -199,7 +201,9 @@ def run_pipeline(image_path, definition):
     # Check if procrastination was detected
     if classification_result[0]["Verdict"]:
         logger.info("Procrastination detected - triggering voice notification")
-        
+        speak("You have been caught procrastinating, please look at the schedule your AI assistant to make you an academic weapon.")
+    else:
+        logger.info("No procrastination detected - no voice notification")
 
     logger.info("=== Pipeline Complete ===")
     return classification_result
