@@ -1,33 +1,33 @@
 .dashboard {
   height: 100%;
+  padding-top: 20px;
 }
 
 .dashboard-main {
-  padding: 2rem;
+  padding: 7rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .start-studying-btn {
-  display: block;
-  margin: 0 auto 2rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: white;
+  padding: 8px 16px;
   background-color: #6c6cff;
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .start-studying-btn:hover {
-  background-color: #5a5aff;
+  background-color: #9494f1;
 }
 
 .input-container {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+  width: 100%;
 }
 
 .study-input {
@@ -36,6 +36,59 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   flex-grow: 1;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.analysis-result {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.analysis-result.procrastinating {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border-left: 4px solid #d32f2f;
+}
+
+.analysis-result.studying {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+}
+
+.analysis-justification {
+  margin-top: 8px;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-btn:hover {
+  background-color: #c62828;
+}
+
+.study-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
 }
   
   
