@@ -31,14 +31,28 @@ export function SiteHeader() {
     }
     
     checkAuth()
+    window.addEventListener('storage', checkAuth)
+    
+    const interval = setInterval(checkAuth, 1000)
+    
+    return () => {
+      window.removeEventListener('storage', checkAuth)
+      clearInterval(interval)
+    }
   }, [])
 
   const handleAccountClick = () => {
     if (isAuthenticated) {
-      navigate('/dashboard')
+      localStorage.removeItem('token')
+      setIsAuthenticated(false)
+      navigate('/')
     } else {
       navigate('/LoginSignup')
     }
+  }
+
+  const handleDashboardClick = () => {
+    navigate('/dashboard')
   }
 
   return (
@@ -74,12 +88,22 @@ export function SiteHeader() {
           </Link>
         </div>
         <div className="header-right">
-          <button 
-            className="button button-primary"
-            onClick={handleAccountClick}
-          >
-            {isAuthenticated ? 'Go to my Dashboard' : 'Log in'}
-          </button>
+          <div className="auth-buttons">
+            <button 
+              className="login-button"
+              onClick={handleAccountClick}
+            >
+              {isAuthenticated ? 'Log Out' : 'Log In'}
+            </button>
+            {isAuthenticated && (
+              <button 
+                className="button button-primary"
+                onClick={handleDashboardClick}
+              >
+                My Dashboard
+              </button>
+            )}
+          </div>
           <button className="menu-button">
             <span className="menu-icon">☰</span>
           </button>

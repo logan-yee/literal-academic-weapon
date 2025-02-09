@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import "./LoginSignup.css";
+import { useNavigate } from "react-router-dom";
 
 function LoginSignup() {
+  const navigate = useNavigate();
   const initialValues = { username: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const hardName = "Naufil";
   const hardEmail = "naufilansari05@gmail.com";
@@ -18,14 +21,27 @@ function LoginSignup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
+    if (isLoggedIn) {
+      // Handle logout
+      setIsLoggedIn(false);
+      setFormValues(initialValues);
+      setIsSubmit(false);
+      localStorage.removeItem('token'); // Clear the token
+      navigate('/');
+    } else {
+      // Handle login
+      setFormErrors(validate(formValues));
+      setIsSubmit(true);
+    }
   };
 
   useEffect(() => {
     console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
+      setIsLoggedIn(true);
+      localStorage.setItem('token', 'dummy-token'); // Set a token
+      navigate('/dashboard');
     }
   }, [formErrors]);
   const validate = (values) => {
@@ -73,40 +89,48 @@ function LoginSignup() {
         <div className="header"><h1>Login Form</h1></div>
         <div className="underline"></div>
         <div className="ui-form">
-          <div className="field">
-            <label>Username: </label>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formValues.username}
-              onChange={handleChange}
-            />
+          {!isLoggedIn && (
+            <>
+              <div className="field">
+                <label>Username: </label>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={formValues.username}
+                  onChange={handleChange}
+                />
+              </div>
+              <span className="form"><p>{formErrors.username}</p></span>
+              <div className="field">
+                <label>Email: </label>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  value={formValues.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <p className="form">{formErrors.email}</p>
+              <div className="field">
+                <label>Password: </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <p className="form">{formErrors.password}</p>
+            </>
+          )}
+          <div className="submit-container">
+            <button className="submit" onClick={handleSubmit}>
+              {isLoggedIn ? 'Log Out' : 'Log In'}
+            </button>
           </div>
-          <span className="form"><p>{formErrors.username}</p></span>
-          <div className="field">
-            <label>Email: </label>
-            <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={formValues.email}
-              onChange={handleChange}
-            />
-          </div>
-          <p className="form">{formErrors.email}</p>
-          <div className="field">
-            <label>Password: </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-            />
-          </div>
-          <p className="form">{formErrors.password}</p>
-          <div className="submit-container"><button className="submit" onClick={handleSubmit}>Submit</button></div>
         </div>
       </form>
     </div>

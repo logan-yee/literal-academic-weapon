@@ -68,6 +68,17 @@
     gap: 1rem;
   }
   
+  .auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    order: 1;
+  }
+  
+  .menu-button {
+    order: 2;
+  }
+  
   .login-link {
     display: none;
     text-decoration: none;
@@ -92,14 +103,37 @@
     background: #6c6cff;
     border: none;
     color: white;
+    transition: all 0.15s ease;
   }
   
-  .menu-button {
-    display: block;
+  .login-button {
     background: none;
     border: none;
-    padding: 0.5rem;
+    color: #333;
+    font-weight: 500;
     cursor: pointer;
+    padding: 0.5rem;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+  
+  .login-button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #6c6cff;
+    transition: width 0.15s ease;
+  }
+  
+  .login-button:hover {
+    color: #6c6cff;
+  }
+  
+  .login-button:hover::after {
+    width: 100%;
   }
   
   @media (min-width: 768px) {
