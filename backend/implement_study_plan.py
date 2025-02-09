@@ -56,13 +56,11 @@ def create_study_schedule(analyses):
     You are a productivity coach analyzing the user's screen activity patterns to create an optimized study schedule.
     
     1. Identify productive and procrastination hours using the "Verdict" field.
-    2. Allocate focused study time in 1-hour intervals during productive hours.
-    3. Ensure total study time is at least {hours} hours.
-<<<<<<< HEAD
-    4. If the provided study time is less than {hours} hours, provide additional study hours during procrastination hours.
-=======
-    4. If the provided study time is less than {hours} hours, suggest additional study hours during procrastination hours.
->>>>>>> 7478b18a33a2ddb2224490e8b8d8155127df493e
+    2. Allocate focused study time in 1 hour intervals during productive hours.
+    3. Add extra {hoursofstudy} dependent on user's study habits to the schedule for a total of at least {hours} hours of study time.
+    4. Add extra {hoursofstudy} in slots that are non-productive hours for a total of at least {hours} hours of study time.
+    5. Check for less than {hours} hours of study time.
+
 
     Data collected from user's screen activity:
     {analysis_data}
