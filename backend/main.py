@@ -5,10 +5,10 @@ from implement_study_plan import run_schedule_creator
 
 app = FastAPI()
 
-# Enable CORS for frontend requests (Node.js, React, etc.)
+# Enable CORS for frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change to specific frontend URL for security
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
