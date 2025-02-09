@@ -1,12 +1,13 @@
 import sys
 import json
 import requests
+from config import API_KEY
 
 print("Python Executable:", sys.executable)
 
 # Canvas API URL and token
 API_URL = "https://learn.ontariotechu.ca/api/v1"
-API_TOKEN = "13377~u2MxkTCccXQvRLNAD4UBhLQP7PNMrxNknWY9rym267YhnDvN6hxGZYJHnz4PDtPf" # Insert API token
+API_TOKEN = API_KEY # Insert API token
 
 headers = {
     "Authorization": f"Bearer {API_TOKEN}",

@@ -1,14 +1,14 @@
 [
     {
-        "id": 30502,
-        "name": "2024/25 FSCI - Preventing Sexual Violence - Building a Respectful Campus Together",
+        "id": 30503,
+        "name": "2024/25 FEAS - Preventing Sexual Violence - Building a Respectful Campus Together",
         "account_id": 3,
-        "uuid": "hdCk2MGtomcXPXVIypbkruVDw3EWoxt2eRfF47HB",
+        "uuid": "TC4UHel4qFQJlCS7vjnYerdpoM8BFlF0XxXL09vQ",
         "start_at": "2024-08-01T04:00:00Z",
         "grading_standard_id": null,
         "is_public": false,
-        "created_at": "2024-07-07T14:57:21Z",
-        "course_code": "2024/25 FSCI - Preventing Sexual Violence - Building a Respectful Campus Together",
+        "created_at": "2024-07-07T14:57:49Z",
+        "course_code": "2024/25 FEAS - Preventing Sexual Violence - Building a Respectful Campus Together",
         "default_view": "wiki",
         "root_account_id": 1,
         "enrollment_term_id": 285,
@@ -24,7 +24,7 @@
         "friendly_name": null,
         "apply_assignment_group_weights": false,
         "calendar": {
-            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_hdCk2MGtomcXPXVIypbkruVDw3EWoxt2eRfF47HB.ics"
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_TC4UHel4qFQJlCS7vjnYerdpoM8BFlF0XxXL09vQ.ics"
         },
         "time_zone": "America/New_York",
         "blueprint": false,
@@ -34,7 +34,7 @@
                 "type": "student",
                 "role": "StudentEnrollment",
                 "role_id": 3,
-                "user_id": 15682,
+                "user_id": 41156,
                 "enrollment_state": "active",
                 "limit_privileges_to_course_section": false
             }
@@ -44,39 +44,423 @@
         "restrict_enrollments_to_course_dates": true
     },
     {
-        "id": 9670,
-        "access_restricted_by_date": true
+        "id": 30493,
+        "name": "202409 - Calculus I - MATH-1010U - 40288.202409.XLIST",
+        "account_id": 1,
+        "uuid": "6aCkmxCfAUqP2FOCWMduejHC4Dg56DKL4bfVjVcm",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-07-07T14:05:51Z",
+        "course_code": "202409 - Calculus I - MATH-1010U - 40288.202409.XLIST",
+        "default_view": "wiki",
+        "root_account_id": 1,
+        "enrollment_term_id": 285,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_6aCkmxCfAUqP2FOCWMduejHC4Dg56DKL4bfVjVcm.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": true,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 9668,
-        "access_restricted_by_date": true
+        "id": 30423,
+        "name": "202409 - Intro. to Engineering - ENGR-1015U - 43335.202409.XLIST",
+        "account_id": 1,
+        "uuid": "mLHnyvaAtNy7MmKUbZvVduSZRta0vr5Y0qeJW6bq",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": null,
+        "created_at": "2024-07-04T18:07:32Z",
+        "course_code": "202409 - Intro. to Engineering - ENGR-1015U - 43335.202409.XLIST",
+        "default_view": "modules",
+        "root_account_id": 1,
+        "enrollment_term_id": 285,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": true,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_mLHnyvaAtNy7MmKUbZvVduSZRta0vr5Y0qeJW6bq.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": false,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 9667,
-        "access_restricted_by_date": true
+        "id": 30491,
+        "name": "202409 - Linear Algebra for Engineers - MATH-1850U - 40311.202409.XLIST",
+        "account_id": 1,
+        "uuid": "3Q1H4MCspPkPn6fuhBfUTWHAFsYNNco0EcfK8xQg",
+        "start_at": "2024-09-03T04:00:00Z",
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-07-07T14:04:49Z",
+        "course_code": "202409 - Linear Algebra for Engineers - MATH-1850U - 40311.202409.XLIST",
+        "default_view": "wiki",
+        "root_account_id": 1,
+        "enrollment_term_id": 285,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": true,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_3Q1H4MCspPkPn6fuhBfUTWHAFsYNNco0EcfK8xQg.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": true,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 8385,
-        "access_restricted_by_date": true
+        "id": 30489,
+        "name": "202409 - Physics I - PHY-1010U - 40363.202409.XLIST",
+        "account_id": 1,
+        "uuid": "Ju70LwwqcDpF9LgJkDTs4cUaG8UXJ88H7a0SofY4",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-07-07T14:03:49Z",
+        "course_code": "202409 - Physics I - PHY-1010U - 40363.202409.XLIST",
+        "default_view": "wiki",
+        "root_account_id": 1,
+        "enrollment_term_id": 285,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_Ju70LwwqcDpF9LgJkDTs4cUaG8UXJ88H7a0SofY4.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            },
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            },
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": true,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 9673,
-        "access_restricted_by_date": true
+        "id": 30447,
+        "name": "202409 - Technical Communications - COMM-1050U - 42750.202409.XLIST",
+        "account_id": 1,
+        "uuid": "Hiq0MBt6S9WsL6F2CCAOqR6puDBhclPMkGApNKUX",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-07-05T20:34:19Z",
+        "course_code": "202409 - Technical Communications - COMM-1050U - 42750.202409.XLIST",
+        "default_view": "modules",
+        "root_account_id": 1,
+        "enrollment_term_id": 285,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_Hiq0MBt6S9WsL6F2CCAOqR6puDBhclPMkGApNKUX.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": false,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 11847,
-        "access_restricted_by_date": true
+        "id": 32933,
+        "name": "202501 - Calculus II - MATH-1020U - 70154.202501.XLIST",
+        "account_id": 1,
+        "uuid": "mJkhOi8EjztnvKWcXoBiWYIxctrAy5QkvmAV0QYx",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-11-06T20:35:41Z",
+        "course_code": "202501 - Calculus II - MATH-1020U - 70154.202501.XLIST",
+        "default_view": "wiki",
+        "root_account_id": 1,
+        "enrollment_term_id": 286,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_mJkhOi8EjztnvKWcXoBiWYIxctrAy5QkvmAV0QYx.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            },
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": true,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 11465,
-        "access_restricted_by_date": true
+        "id": 32935,
+        "name": "202501 - Chemistry for Engineers - CHEM-1800U - 70066.202501.XLIST",
+        "account_id": 1,
+        "uuid": "MFN95t45UHziHv5rgVIqyrvcDxuNy5CjH1pleFHs",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-11-06T20:52:01Z",
+        "course_code": "202501 - Chemistry for Engineers - CHEM-1800U - 70066.202501.XLIST",
+        "default_view": "wiki",
+        "root_account_id": 1,
+        "enrollment_term_id": 286,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_MFN95t45UHziHv5rgVIqyrvcDxuNy5CjH1pleFHs.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": false,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 11882,
-        "access_restricted_by_date": true
+        "id": 32537,
+        "name": "202501 - Engineering Design - 75207",
+        "account_id": 1,
+        "uuid": "c4nb5sOepm2vfgv4SOyr9JfdLXBIxK4SnQttwZ97",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": null,
+        "created_at": "2024-11-06T11:32:48Z",
+        "course_code": "202501 - Engineering Design - 75207",
+        "default_view": "modules",
+        "root_account_id": 1,
+        "enrollment_term_id": 286,
+        "license": null,
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_c4nb5sOepm2vfgv4SOyr9JfdLXBIxK4SnQttwZ97.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": false,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     },
     {
-        "id": 14627,
-        "access_restricted_by_date": true
+        "id": 31255,
+        "name": "202501 - Impact of Sci & Tech on Soc. - 72742",
+        "account_id": 1,
+        "uuid": "NyGikSsVe235fbmKnjYvtZiTZw2Rqcr5TtgLRRQ2",
+        "start_at": null,
+        "grading_standard_id": 8,
+        "is_public": false,
+        "created_at": "2024-11-06T11:32:23Z",
+        "course_code": "202501 - Impact of Sci & Tech on Soc. - 72742",
+        "default_view": "modules",
+        "root_account_id": 1,
+        "enrollment_term_id": 286,
+        "license": "private",
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 1048,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": true,
+        "calendar": {
+            "ics": "https://learn.ontariotechu.ca/feeds/calendars/course_NyGikSsVe235fbmKnjYvtZiTZw2Rqcr5TtgLRRQ2.ics"
+        },
+        "time_zone": "America/New_York",
+        "blueprint": false,
+        "template": false,
+        "enrollments": [
+            {
+                "type": "student",
+                "role": "StudentEnrollment",
+                "role_id": 3,
+                "user_id": 41156,
+                "enrollment_state": "active",
+                "limit_privileges_to_course_section": false
+            }
+        ],
+        "hide_final_grades": false,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
     }
 ]
