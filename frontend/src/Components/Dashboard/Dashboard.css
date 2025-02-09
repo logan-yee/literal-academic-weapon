@@ -23,5 +23,19 @@
 .start-studying-btn:hover {
   background-color: #5a5aff;
 }
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.study-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+}
   
   

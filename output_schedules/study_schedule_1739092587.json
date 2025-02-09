@@ -1,0 +1,28 @@
+{
+  "schedule": {
+    "01:00 am": false,
+    "02:00 am": false,
+    "03:00 am": false,
+    "04:00 am": false,
+    "05:00 am": false,
+    "06:00 am": false,
+    "07:00 am": false,
+    "08:00 am": false,
+    "09:00 am": false,
+    "10:00 am": false,
+    "11:00 am": false,
+    "12:00 pm": false,
+    "01:00 pm": false,
+    "02:00 pm": false,
+    "03:00 pm": false,
+    "04:00 pm": false,
+    "05:00 pm": false,
+    "06:00 pm": true,
+    "07:00 pm": false,
+    "08:00 pm": false,
+    "09:00 pm": false,
+    "10:00 pm": false,
+    "11:00 pm": true
+  },
+  "explanation": "The schedule optimizes productivity by allocating focused study time during the identified productive hours (6 PM to 12 AM) while minimizing distractions in non-productive hours. It ensures a minimum of 5 hours of study time throughout the day."
+}

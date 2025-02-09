@@ -2,3 +2,4 @@
 .internvl.log
 .analyze.log
 backend/screenshots/
+backend/config.py

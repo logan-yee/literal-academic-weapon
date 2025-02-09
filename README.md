@@ -10,7 +10,15 @@ The LLM can detect whenever your screen is displaying something unrelated to you
 
 ## How we built it
 
-We built the back-end using Python, and a large language model called Ollama. It was trained to recognize and relate screenshots to an assignment, and can differentiate related work from unrelated procrastination. Additionally, the front-end web pages were made using HTML/CSS, JavaScript, and React.js. 
+We built the back-end using Python. We utilized a multi-agent system to differentiate related work from procrastination, and had an LLM generate an optimized study schedule for the user. 
+- Using Pillow to capture images of the users screen
+- InternVL implemented with pytorch to generate image to text outputs
+- Ollamas Llama3 model executed with Langchain to classify the text outputs and format it to json
+- Mistral model with Ollama and Lanchain to generate an optimized study schedule based on user habits
+- pytts3 for a text-to-speech notification
+- plyer for a system notification
+- FastAPI to link the back end to the front end
+- React.js for front end web pages 
 
 ## Challenges we ran into
 
