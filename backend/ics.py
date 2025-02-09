@@ -22,7 +22,6 @@ optimized_schedule = {
         }
     }
 }
-filename = os.path.expanduser("~/Downloads/study_schedule.ics")
 
 def export_to_ics(optimized_schedule, filename="study_schedule.ics"):
     cal = Calendar()

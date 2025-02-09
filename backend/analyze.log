@@ -1,0 +1,21 @@
+2025-02-09 01:26:56,255 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 01:26:56,607 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 01:26:56,607 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 01:26:56,608 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 01:26:56,608 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 01:26:57,515 - utils.internvl_loader - ERROR - Error loading InternVL model: This modeling file requires the following packages that were not found in your environment: timm, einops. Run `pip install timm einops`
+2025-02-09 01:26:57,515 - analyze_screenshots - ERROR - Error loading models: This modeling file requires the following packages that were not found in your environment: timm, einops. Run `pip install timm einops`
+2025-02-09 01:27:02,567 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 01:27:02,730 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 01:27:02,730 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 01:27:02,730 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 01:27:02,731 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 01:27:02,960 - utils.internvl_loader - ERROR - Error loading InternVL model: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
+2025-02-09 01:27:02,960 - analyze_screenshots - ERROR - Error loading models: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
+2025-02-09 01:34:57,082 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 01:34:57,204 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 01:34:57,204 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 01:34:57,204 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 01:34:57,204 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 01:34:57,436 - utils.internvl_loader - ERROR - Error loading InternVL model: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
+2025-02-09 01:34:57,437 - analyze_screenshots - ERROR - Error loading models: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`

@@ -5,9 +5,6 @@ import { Dashboard } from "./Components/Dashboard/Dashboard"
 import "./App.css"
 import LoginSignup from "./Components/LoginSignup/LoginSignup"
 import Stats from "./Components/Stats/Stats"
-import DashboardLayout from "./Components/Dashboard/Layout/DashboardLayout"
-import Profile from "./Components/Profile/Profile"
-
 
 function App() {
   return (
@@ -23,10 +20,9 @@ function App() {
               </main>
             }
           />
-          <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/LoginSignup" element={<LoginSignup />} />
-          <Route path="/stats" element={<DashboardLayout><Stats /></DashboardLayout>} />
-          <Route path="/dashboard/profile" element={<DashboardLayout><Profile /></DashboardLayout>} />
+          <Route path="/stats" element={<Stats />} />
         </Routes>
       </div>
     </Router>
@@ -34,5 +30,4 @@ function App() {
   )
 }
 
-export default App
-
+export default App 

@@ -5,6 +5,7 @@ from typing import Dict
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_ollama import OllamaLLM
+import time
 
 #cmd prompt: ollama pull mistral
 
@@ -67,7 +68,7 @@ def create_study_schedule(analyses):
     Data collected from user's screen activity:
     {analysis_data}
 
-    Return output in Json format and nothing else and remove all comments including backslashes.:
+    Return output in Json format and nothing else and remove all comments including backslashes and remove all elipses.:
 
     {{
         "schedule": {{
@@ -111,8 +112,13 @@ def create_study_schedule(analyses):
         return None
 
 # Main function to run the schedule creator
+import time  # Import time for unique filenames
+
 def run_schedule_creator():
     analyses_directory = "analyses"
+    output_directory = "backend_schedules"  # Directory to store backend JS schedules
+    os.makedirs(output_directory, exist_ok=True)  # Ensure the directory exists
+
     all_analyses = load_analyses_from_directory(analyses_directory)
 
     print(f"Analyses: {json.dumps(all_analyses, indent=2)}")  # Debugging
@@ -121,11 +127,23 @@ def run_schedule_creator():
 
     if schedule:
         try:
-            # If it's a string, ensure it's valid JSON
-            if isinstance(schedule, str):
-                schedule = json.loads(schedule)  # Convert string to dictionary
+            # Convert Pydantic object to dictionary if necessary
+            if isinstance(schedule, StudySchedule):
+                schedule = schedule.dict()
 
-            print(f"Generated Study Schedule:\n{json.dumps(schedule, indent=2)}")
+            # Generate a unique filename using timestamp
+            filename = f"study_schedule_{int(time.time())}.js"
+            file_path = os.path.join(output_directory, filename)
+
+            # Convert dictionary to a Node.js-compatible module export
+            js_content = f"module.exports = {json.dumps(schedule, indent=2)};"
+
+            # Write to JS file
+            with open(file_path, "w") as js_file:
+                js_file.write(js_content)
+
+            print(f"Generated Study Schedule saved to {file_path}")
+
         except json.JSONDecodeError as e:
             print("JSON Parsing Error:", e)
     else:

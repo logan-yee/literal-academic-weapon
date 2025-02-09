@@ -1,2 +1,3 @@
 .venv/
 .internvl.log
+backend/config.py

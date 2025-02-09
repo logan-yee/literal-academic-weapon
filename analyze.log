@@ -246,3 +246,10 @@ For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/er
 2025-02-09 01:06:17,542 - comtypes.client._generate - INFO - # Generating comtypes.gen.stdole
 2025-02-09 01:06:18,884 - __main__ - INFO - Screenshot analysis stopped by user
 2025-02-09 01:06:18,884 - utils.internvl_loader - INFO - Starting model cleanup...
+2025-02-09 05:39:13,441 - utils.internvl_loader - INFO - Using device: cpu
+2025-02-09 05:39:13,641 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - vision_select_layer: -1
+2025-02-09 05:39:13,641 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - ps_version: v2
+2025-02-09 05:39:13,642 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - min_dynamic_patch: 1
+2025-02-09 05:39:13,642 - transformers_modules.OpenGVLab.InternVL2_5-1B-MPO.62cab546e79f6206a2fa5dfa9899ba8f7bcf3834.configuration_internvl_chat - INFO - max_dynamic_patch: 12
+2025-02-09 05:39:14,054 - utils.internvl_loader - ERROR - Error loading InternVL model: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
+2025-02-09 05:39:14,055 - analyze_screenshots - ERROR - Error loading models: This modeling file requires the following packages that were not found in your environment: einops, timm. Run `pip install einops timm`
